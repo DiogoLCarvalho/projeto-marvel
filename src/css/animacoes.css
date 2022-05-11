@@ -1,0 +1,39 @@
+@keyframes c-glowing-blue {
+    0% {
+      box-shadow: 0 0 5px var(--cor-azul-fraca), 0 0 5px var(--cor-azul-fraca), 0 0 15px var(--cor-azul-fraca), 0 0 20px var(--cor-azul-principal), 0 0 10px var(--cor-azul-principal), 0 0 10px var(--cor-azul-principal), 0 0 10px var(--cor-azul-principal), 0 0 10px var(--cor-azul-principal)
+    }
+  
+    to {
+      box-shadow: 0 0 2.5px var(--cor-azul-fraca), 0 0 2.5px var(--cor-azul-fraca), 0 0 7.5px var(--cor-azul-fraca), 0 0 10px var(--cor-azul-principal), 0 0 5px var(--cor-azul-principal), 0 0 5px var(--cor-azul-principal), 0 0 5px var(--cor-azul-principal), 0 0 2px var(--cor-azul-principal)
+    }
+  }
+  
+  @keyframes c-glowing-red {
+    0% {
+      box-shadow: 0 0 5px var(--cor-marrom-fraco), 0 0 5px var(--cor-marrom-fraco), 0 0 15px var(--cor-marrom-fraco), 0 0 20px var(--cor-vermelha-principal), 0 0 10px var(--cor-vermelha-principal), 0 0 10px var(--cor-vermelha-principal), 0 0 10px var(--cor-vermelha-principal), 0 0 10px var(--cor-vermelha-principal)
+    }
+  
+    to {
+      box-shadow: 0 0 2.5px var(--cor-marrom-fraco), 0 0 2.5px var(--cor-marrom-fraco), 0 0 7.5px var(--cor-marrom-fraco), 0 0 10px var(--cor-vermelha-principal), 0 0 5px var(--cor-vermelha-principal), 0 0 5px var(--cor-vermelha-principal), 0 0 5px var(--cor-vermelha-principal), 0 0 2px var(--cor-vermelha-principal)
+    }
+  }
+  
+  @keyframes text-glowing-blue {
+    0% {
+      text-shadow: 0 0 1px var(--cor-padrao), 0 0 1px var(--cor-padrao), 0 0 1px var(--cor-padrao), 0 0 1px var(--cor-azul-media), 0 0 5px var(--cor-azul-media), 0 0 2px var(--cor-azul-media), 0 0 10px var(--cor-azul-media), 0 0 10px var(--cor-azul-media)
+    }
+  
+    to {
+      text-shadow: 0 0 .5px var(--cor-padrao), 0 0 .5px var(--cor-padrao), 0 0 .5px var(--cor-padrao), 0 0 .5px var(--cor-azul-media), 0 0 5px var(--cor-azul-media), 0 0 .5px var(--cor-azul-media), 0 0 5px var(--cor-azul-media), 0 0 2px var(--cor-azul-media)
+    }
+  }
+  
+  @keyframes text-glowing-red {
+    0% {
+      text-shadow: 0 0 1px var(--cor-marrom-fraco), 0 0 1px var(--cor-marrom-fraco), 0 0 1px var(--cor-marrom-fraco), 0 0 1px var(--cor-vermelha-fraca), 0 0 5px var(--cor-vermelha-fraca), 0 0 2px var(--cor-vermelha-fraca), 0 0 10px var(--cor-vermelha-fraca), 0 0 10px var(--cor-vermelha-fraca)
+    }
+  
+    to {
+      text-shadow: 0 0 .5px var(--cor-marrom-fraco), 0 0 .5px var(--cor-marrom-fraco), 0 0 .5px var(--cor-marrom-fraco), 0 0 .5px var(--cor-vermelha-fraca), 0 0 5px var(--cor-vermelha-fraca), 0 0 .5px var(--cor-vermelha-fraca), 0 0 5px var(--cor-vermelha-fraca), 0 0 2px var(--cor-vermelha-fraca)
+    }
+  }
