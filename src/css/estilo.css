@@ -1,0 +1,161 @@
+body {
+    font-family: 'ssf4', 'Courier New', Courier, monospace;
+    background-color: var(--cor-secundaria);
+}
+
+body::before {
+    content: '';
+    background-image: url("../imagens/1cYrMYF.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cabecalho {
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cabecalho .title {
+    color: var(--cor-titulo-fraco);
+    text-transform: uppercase;
+    font-size: 52px;
+    line-height: 102px;
+    -webkit-text-stroke: 2px var(--cor-titulo-forte);
+}
+
+.selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Personagem grande a esquerda */
+.selection .big__character {
+    text-align: center;
+    width: 30%;
+    height: 70vh;
+    position: relative;
+}
+
+.selection .big__character img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.selection .big__character .name__character h2 {
+    width: 100%;
+    font-size: 27px;
+    color: var(--cor-padrao);
+    font-family: 'command', sans-serif;
+    position: absolute;
+    bottom: -15px;
+}
+
+.selection .big__character .name__character::before {
+    content: '';
+    height: 17px;
+    width: 100%;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+}
+
+.selection .big__character.player__number-1 .name__character::before {
+    background-color: var(--cor-azul-principal);
+}
+
+.selection .big__character.player__number-2 .name__character::before {
+    background-color: var(--cor-vermelha-principal);
+}
+
+
+
+.characters__list {
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.characters__list .character {
+    border: 2px solid var(--cor-padrao);
+    background-color: var(--cor-padrao);
+    width: 30%;
+    height: 160px;
+    cursor: pointer;
+    border-radius: 10px;
+    position: relative;
+    transition: .30s ease-in-out;
+    z-index: 2;
+}
+
+.characters__list .character img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* Animação do outro arquivo */
+.characters__list .character.seleted {
+    border: 2px solid var(--cor-azul-media);
+    animation: c-glowing-blue .3s ease-in-out infinite;
+    animation-direction: alternate;
+}
+
+.characters__list .character.second-player_seleted {
+    border: 2px solid var(--cor-vermelha-fraca);
+    animation: c-glowing-red .3s ease-in-out infinite;
+    animation-direction: alternate;
+}
+
+.characters__list .character:hover {
+    animation: c-glowing-blue .3s ease-in-out infinite;
+    animation-direction: alternate;
+    transform: scale(1.07);
+    z-index: 2;
+}
+
+.characters__list .character.second-player_seleted:hover {
+    animation: c-glowing-red .3s ease-in-out infinite;
+    animation-direction: alternate;
+}
+
+.characters__list .character .tag {
+    display: none;
+    font-family: 'Times New Roman', Times, serif;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: var(--cor-azul-media);
+    transition: opacity .3s ease-in-out;
+    animation: text-glowing-blue .3s ease-in-out infinite;
+    animation-direction: alternate;
+}
+
+.characters__list .character.seleted .tag {
+    display: block;
+    animation: text-glowing-blue .3s ease-in-out infinite;
+    animation-direction: alternate;
+    font-size: 20px;
+}
+.characters__list .character.second-player_seleted .tag{
+    display: block;
+    animation: text-glowing-red .3s ease-in-out infinite;
+    animation-direction: alternate;
+    font-size: 20px;
+}
