@@ -1,5 +1,5 @@
 const personagens = document.querySelectorAll('.character');
-const jogador02 = document.querySelector('#viuva-negra');
+const jogador02 = document.querySelector('#feiticeira-escarlate');
 
 // Vai percorrer todos os li de personagens
 // Ao você colocar o mouse em cima ele chama a função
@@ -36,7 +36,7 @@ personagens.forEach((personagem) => {
 
         // Imagem grande do personagem
         const imagemJg1 = document.getElementById('selected__character');
-        imagemJg1.src = `src/imagens/${idSelecionado}.png`;
+        imagemJg1.src = `src/imagens/${idSelecionado}-big.png`;
 
 
         // Mudar nome em baixo
