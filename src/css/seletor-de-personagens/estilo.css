@@ -177,9 +177,9 @@ main {
     height: 100vh;
     background-color: rgba(0, 0, 0, .5);
     position: absolute;
-    z-index: 3;
     font-family: 'Times New Roman', Times, serif;
     /* display: none; */
+    z-index: 3;
 }
 
 .card {
@@ -194,6 +194,7 @@ main {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    z-index: 99;
 }
 
 .content__title {
@@ -207,11 +208,12 @@ main {
     padding: 20px;
 }
 
-.content__title img{
+.content__title img {
     width: 250px;
     height: 250px;
 }
-.content__title h2{
+
+.content__title h2 {
     font-size: 1.3em;
     font-family: 'command', sans-serif;
     font-weight: bold;
@@ -222,7 +224,7 @@ main {
     height: 20%;
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 }
 
 .text__box {
@@ -232,7 +234,8 @@ main {
     /* margin: 0 auto; */
     text-align: justify;
 }
-.content__text img{
+
+.content__text img {
     width: 250px;
     height: 250px;
 }
@@ -290,7 +293,8 @@ main {
     position: relative;
     top: 1px;
 }
-#card__link{
+
+#card__link {
     width: 93%;
     text-align: left;
 }
@@ -301,6 +305,10 @@ main {
     .selection .big__character {
         width: 20%;
         height: 60vh;
+    }
+
+    .card {
+        width: 36vw;
     }
 }
 
@@ -322,13 +330,33 @@ main {
         width: 23%;
         height: 60vh;
     }
+
+    .card {
+        width: 44vw;
+    }
 }
+
 @media (max-width:1090px) {
     .selection .big__character {
         width: 16%;
         height: 60vh;
     }
+
+    .card {
+        width: 55vw;
+    }
+
+    .content__title img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .text__box {
+        width: 70%;
+    }
+
 }
+
 
 @media (max-width:1000px) {
     body::before {
@@ -353,8 +381,61 @@ main {
     }
 }
 
+@media (max-width:800px) {
+    .card {
+        width: 70vw;
+    }
+
+    .content__title h2 {
+        font-size: 1.2em;
+    }
+
+    .text__box {
+        width: 90%;
+    }
+
+    .text__box p {
+        font-size: 1em;
+    }
+
+    .button__style {
+        padding: 10px 4px;
+    }
+}
+
+@media (max-width:500px) {
+    .card {
+        width: 90vw;
+        height: 90vh;
+        top: 5%;
+    }
+
+    .content__title h2 {
+        font-size: 14px;
+    }
+
+    .content__title img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .content__text {
+        height: 25%;
+    }
+
+    .text__box p {
+        font-size: .8em;
+    }
+
+    .button__style {
+        padding: 5px 4px;
+    }
+}
+
 @media (max-width:360px) {
     .cabecalho .title {
         font-size: 18px;
     }
 }
+
+/* card responsivo */
