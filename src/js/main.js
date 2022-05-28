@@ -49,3 +49,19 @@ personagens.forEach((personagem) => {
     })
 });
 
+// Bounce card animation
+let sectionCard = document.querySelector('#card__description');
+let card = document.querySelector('.card');
+
+
+window.onmousedown= function (event) {
+    if (event.target == sectionCard) {
+        card.classList.add('bounce_card');
+    }
+}
+
+window.onmouseup= function (event) {
+    if (event.target == sectionCard) {
+        card.classList.remove('bounce_card');
+    }
+}
