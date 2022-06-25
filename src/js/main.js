@@ -102,7 +102,23 @@ personagens.forEach((personagem) => {
                 break;
         }
 
-    
+        // MARVEL API
+        fetch(`https://gateway.marvel.com/v1/public/characters/${idCharacterAPI}?&ts=1&apikey=806f2797d31fd36dbdbf2e44ee2c98fb&hash=a3c02225898174c829bb9e7184e35968`).then((responde) => {
+            return responde.json();
+        }).then((jsonParsed) => {
+
+            jsonParsed.data.results.forEach(element => {
+                // Colocar img
+                var heroImg = element.thumbnail.path + '.' + element.thumbnail.extension;
+                thumbnail.src = heroImg;
+
+                // Colocar descrição
+                description.innerHTML = element.description == '' ? `Sorry, we did not find any information about the character :( BUT if you wanna know more about <b>${element.name}</b> go check out the comics: <a href="${element.urls[0].url}" target="_blank">here</a>` : element.description;
+            });
+
+        });
+    });
+
 });
 
 
