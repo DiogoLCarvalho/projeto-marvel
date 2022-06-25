@@ -45,23 +45,104 @@ personagens.forEach((personagem) => {
         const nomeSelecionado = document.getElementById('nome-jogador-01');
         nomeSelecionado.innerHTML = personagem.dataset.name;
 
-
     })
+
+    personagem.addEventListener('click', () => {
+        let nameCaracterCard = document.querySelector('#title__name');
+        let thumbnail = document.querySelector('#title_thumbanail');
+        let description = document.querySelector('#box__descrition');
+
+        thumbnail.src = 'src/imagens/preview-image.gif';
+        description.innerHTML = ' ';
+
+        // Abrir card
+        sectionCard.style.display = 'block';
+
+        nameCaracterCard.innerHTML = personagem.dataset.name;
+
+        switch (personagem.dataset.number) {
+            case '01':
+                var idCharacterAPI = 1009189;
+                break;
+
+            case '02':
+                var idCharacterAPI = 1009268;
+                break;
+
+            case '03':
+                var idCharacterAPI = 1009562;
+                break;
+
+            case '04':
+                var idCharacterAPI = 1009282;
+                break;
+
+            case '05':
+                var idCharacterAPI = 1009629;
+                break;
+
+            case '06':
+                var idCharacterAPI = 1009452;
+                break;
+
+            case '07':
+                var idCharacterAPI = 1010338;
+                break;
+
+            case '08':
+                var idCharacterAPI = 1009610;
+                break;
+
+            case '09':
+                var idCharacterAPI = 1009368;
+                break;
+
+            default:
+                alert('Erro ao selecionar o personagem :( ')
+                break;
+        }
+
+        // MARVEL API
+        fetch(`https://gateway.marvel.com/v1/public/characters/${idCharacterAPI}?&ts=1&apikey=806f2797d31fd36dbdbf2e44ee2c98fb&hash=a3c02225898174c829bb9e7184e35968`).then((responde) => {
+            return responde.json();
+        }).then((jsonParsed) => {
+
+            jsonParsed.data.results.forEach(element => {
+                // Colocar img
+                var heroImg = element.thumbnail.path + '.' + element.thumbnail.extension;
+                thumbnail.src = heroImg;
+
+                // Colocar descrição
+                description.innerHTML = element.description == '' ? `Sorry, we did not find any information about the character :( BUT if you wanna know more about <b>${element.name}</b> go check out the comics: <a href="${element.urls[0].url}" target="_blank">here</a>` : element.description;
+            });
+
+        });
+    });
+
 });
+
+
+
+// CARD
 
 // Bounce card animation
 let sectionCard = document.querySelector('#card__description');
 let card = document.querySelector('.card');
 
-
-window.onmousedown= function (event) {
+window.onmousedown = function (event) {
     if (event.target == sectionCard) {
         card.classList.add('bounce_card');
     }
 }
 
-window.onmouseup= function (event) {
+window.onmouseup = function (event) {
     if (event.target == sectionCard) {
         card.classList.remove('bounce_card');
     }
 }
+
+let btnConfirm = document.querySelector('#canc').addEventListener('click', () => {
+    sectionCard.style.display = 'none';
+});
+
+let btnCancel = document.querySelector('#conf');
