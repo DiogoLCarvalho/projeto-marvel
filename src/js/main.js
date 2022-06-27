@@ -1,6 +1,9 @@
 const personagens = document.querySelectorAll('.character');
 const jogador02 = document.querySelector('#feiticeira-escarlate');
 
+
+let auxSelecterCharacter = false
+
 // Vai percorrer todos os li de personagens
 // Ao você colocar o mouse em cima ele chama a função
 // Remove a classe seleted de todos os li
@@ -10,22 +13,28 @@ personagens.forEach((personagem) => {
 
     personagem.addEventListener('mouseenter', () => {
 
-        personagens.forEach((player02) => {
-            if (!(player02.getAttribute('class') === 'character second-player_seleted')) {
-                jogador02.classList.add('second-player_seleted');
-            }
-        })
-
-
         // Hover personagem selecionado
+        if (!auxSelecterCharacter) {
 
-        // remove a classe 
-        const personagemSelecionado = document.querySelector('.seleted');
-        personagemSelecionado.classList.remove('seleted')
-        personagem.classList.remove('second-player_seleted');
+            personagens.forEach((player02) => {
+                if (!(player02.getAttribute('class') === 'character second-player_seleted')) {
+                    jogador02.classList.add('second-player_seleted');
+                }
+            })
 
-        // Adiciona nova classe
-        personagem.classList.add('seleted');
+            // remove a classe 
+            const personagemSelecionado = document.querySelector('.seleted');
+            personagemSelecionado.classList.remove('seleted')
+
+            // Adiciona nova classe
+            personagem.classList.add('seleted');
+        } else {
+            const personagemSelecionado = document.querySelector('.second-player_seleted');
+            personagemSelecionado.classList.remove('second-player_seleted')
+
+            // Adiciona nova classe
+            personagem.classList.add('second-player_seleted');
+        }
 
 
         // Trocar imagem grande 
@@ -34,16 +43,15 @@ personagens.forEach((personagem) => {
         // Passa pelo li selecionado e pega o id dele
         const idSelecionado = personagem.attributes.id.value;
 
+
         // Imagem grande do personagem
         const imagemJg1 = document.getElementById('selected__character');
         imagemJg1.src = `src/imagens/${idSelecionado}-big.png`;
 
-
         // Mudar nome em baixo
-
         // Só pega o data-attribute do HTML
-        const nomeSelecionado = document.getElementById('nome-jogador-01');
-        nomeSelecionado.innerHTML = personagem.dataset.name;
+        const nameJg2 = document.getElementById('nome-jogador-01');
+        nameJg2.innerHTML = personagem.dataset.name;
 
     })
 
@@ -117,7 +125,9 @@ personagens.forEach((personagem) => {
             });
 
         });
+
     });
+
 
 });
 
@@ -141,8 +151,38 @@ window.onmouseup = function (event) {
     }
 }
 
-let btnConfirm = document.querySelector('#canc').addEventListener('click', () => {
+// Sair do card
+let btnCancel = document.querySelector('#canc').addEventListener('click', () => {
+    // Esconde o card
     sectionCard.style.display = 'none';
 });
 
-let btnCancel = document.querySelector('#conf');
+let btnConf = document.querySelector('#conf').addEventListener('click', () => {
+    // Esconde o card
+    sectionCard.style.display = 'none';
+
+    // Seleciona o personagem confirmado
+    const personagemSelecionado = document.querySelector('.seleted');
+    personagemSelecionado.childNodes[1].innerHTML = 'seletecplayer'
+
+    // Variavel auxiliar para selecionar o personagem, para trocar o efeito do azul e vermelho
+    auxSelecterCharacter = true;
+
+    // Trocar tag 1P ao confirmar personagem
+    const tagPlayer = document.querySelectorAll('.character > .tag');
+    tagPlayer.forEach((tag) => {
+        tag.innerHTML === 'seletecplayer' ? tag.innerHTML = '1P' : tag.innerHTML = '2P';
+    });
+
+    // Mudar a imagem para o segundo personagem
+    const imagemJg1 = document.getElementById('selected__character');
+    imagemJg1.removeAttribute('id');
+    const imagemJg2 = document.querySelector('.big__character.player__number-2 > img');
+    imagemJg2.setAttribute('id', 'selected__character');
+
+    // Mudar o nome para o segundo personagem
+    const nomeSelecionado = document.getElementById('nome-jogador-01');
+    nomeSelecionado.removeAttribute('id');
+    const nameJg2 = document.querySelector('.big__character.player__number-2 > .name__character > h2');
+    nameJg2.setAttribute('id', 'nome-jogador-01');
+});

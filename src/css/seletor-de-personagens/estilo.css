@@ -61,6 +61,10 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+/* Inverter personagem */
+.selection .big__character.player__number-2 img {
+    transform: translate(-50%, -50%)  scaleX(-1);
+}
 
 
 
@@ -131,7 +135,7 @@ main {
     animation-direction: alternate;
 }
 
-.characters__list .character:hover {
+.characters__list .character.seleted:hover {
     animation: c-glowing-blue .3s ease-in-out infinite;
     animation-direction: alternate;
     transform: scale(1.07);
