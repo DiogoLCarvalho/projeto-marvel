@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/desenvolvimento-do-jogo/estilo.css">
     <title>Start the game!!</title>
 </head>
+
 <body>
-    <canvas></canvas>
+    <main class="l-main">
+        <section class="l-main__container">
+
+            <article class="l-container right-side">
+                <div class="c-container__healthBar-Player"></div>
+
+                <div class="c-container__healthBar-bottom" id="playerHealth"></div>
+            </article>
+
+            <div class="c-container__timer"></div>
+
+            <article class="l-container">
+                <div class="c-container__healthBar-Enemy"></div>
+
+                <div class="c-container__healthBar-bottom"  id="enemyHealth"></div>
+            </article>
+        </section>
+
+        <canvas></canvas>
+    </main>
+
     <script src="../js/game.js"></script>
 </body>
+
 </html>

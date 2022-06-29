@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+}
+
+.l-main {
+    position: relative;
+    display: inline-block;
+}
+
+.l-main__container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.l-container{
+    position: relative;
+    width: 100%;
+    height: 30px;
+}
+
+.c-container__healthBar-Enemy, .c-container__healthBar-Player {
+    height: inherit;
+    background-color: goldenrod;
+    margin: 0px 10px;
+}
+
+/* Trocando  a direção */
+.right-side{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#playerHealth{
+    width: 100%;
+    left: inherit;
+}
+.c-container__healthBar-Player{
+    width: 100%;
+}
+
+.c-container__healthBar-bottom{
+    position: absolute;
+    background-color: cadetblue;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: 0px 10px;
+}
+
+.c-container__timer {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
