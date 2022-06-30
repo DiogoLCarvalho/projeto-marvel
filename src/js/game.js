@@ -135,6 +135,47 @@ function colisao({ player1, enemy }) {
 }
 
 
+// SIXTH TASK - Game trigger and game over
+function winner({ player, enemy, timerID }) {
+    clearTimeout(timerID)
+
+    document.querySelector('.c-timer').style.display = 'block';
+
+    if (auxWinner === false) {
+        if (player.health === enemy.health) {
+            document.querySelector('.c-timer').innerHTML = 'EMPATE';
+            auxWinner = true;
+        } else if (player.health > enemy.health) {
+            document.querySelector('.c-timer').innerHTML = 'Jogador 1 Ganhou';
+            auxWinner = true;
+        } else if (enemy.health > player.health) {
+            document.querySelector('.c-timer').innerHTML = 'Jogador 2 Ganhou';
+            auxWinner = true;
+        }
+    }
+}
+
+// SIXTH TASK - Game trigger and game over
+// Diminuir o tempo do jogo
+let timer = 60;
+let timerID;
+let auxWinner = false;
+function decreaseTimer() {
+
+    if (timer > 0) {
+        timerID = setTimeout(decreaseTimer, 1000)
+        timer--
+        document.querySelector('#timer').innerHTML = timer
+    }
+
+    if (timer === 0) {
+        winner({ player, enemy, timerID });
+    }
+
+}
+decreaseTimer();
+
+
 // Loop de animação = para gravidade, velocidade, etc
 function animate() {
     window.requestAnimationFrame(animate); // sempre chama a função de paramentro, no caso ele mesma
@@ -185,12 +226,16 @@ function animate() {
         enemy.isAttacking
     ) {
         enemy.isAttacking = false // só vai por um ataque de cada vez
-        
+
         // FIFTH TASK - health life!!!
         player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%'
     }
 
+    // SIXTH TASK - Game trigger and game over
+    if (player.health <= 0 || enemy.health <= 0) {
+        winner({ player, enemy, timerID });
+    }
 
 }
 animate();
@@ -270,12 +315,7 @@ window.addEventListener('keyup', event => { // faz a verificação de cada tecla
 
 
 
-
+//in the code
 // FOURTH TASK - Attacks!!!
-
-
-
-
-
-
 // FIFTH TASK - health life!!!
+// SIXTH TASK - Game trigger and game over
