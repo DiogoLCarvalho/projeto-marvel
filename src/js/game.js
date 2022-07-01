@@ -1,3 +1,4 @@
+
 // FIRST TASK - Project setup
 
 const canvas = document.querySelector('canvas'); // onde o desenho vai acontecer
@@ -16,66 +17,29 @@ c.fillRect(0, 0, canvas.width, canvas.height) // black background
 
 const gravity = 0.7; // gravidade para o jogador sempre cair
 
-// Class
-class Sprite {
-    constructor({ position, velocity, color, offset }) { // passando um objeto = com isso não importa a order
-        this.position = position // cada vez que vc instanciar um novo jogador vc podera indicar onde ele esta na tela (canvas)
-        this.velocity = velocity
-        this.width = 50
-        this.height = 150
-        this.lastKey // THREE TASK - mover o inimigo
-        this.attackBox = { //FOURTH TASK - braço para atacar
-            position: {
-                x: this.position.x,
-                y: this.position.y
-            },
-            offset: offset,
-            width: 100,
-            height: 50
-        }
-        this.color = color
-        this.isAttacking
-        this.health = 100// FIFTH TASK - health life!!!
-    }
+// As classes estão no outro arquivo
 
-    draw() { // colocando o jogador na tela, com a cor, e o posicionamento passado pela instância da classe (50 (largura), 150(altura))
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+// SEVENTH TASK - Background sprite
+const background = new Sprite({
+    position: {
+        x: 0,
+        y: 0
+    },
+    imgSrc: '../imagens/game/background_game.png'
+})
+const baby = new Sprite({
+    position: {
+        x: 260,
+        y: 430
+    },
+    imgSrc: '../imagens/game/baby_crying.png',
+    scale: 1.2,
+    framesMax: 8
+})
 
-        // FOURTH TASK
-        if (this.isAttacking) {
-            c.fillStyle = '#FCFC81';
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-        }
-    }
-
-    // FOURTH TASK - Attacks!!! - ativa o ataque por um periodo de tempo
-    attacks() {
-        this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100);
-    }
-
-    update() { // gravidade, velocidade, "fisica do jogo"
-        this.draw();
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
-
-        this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
-        this.position.y += this.velocity.y
-
-        // Não deixar que o player passe a tela     
-        if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-            this.velocity.y = 0
-        } else {
-            this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
-        }
-    }
-}
 
 // Players - vc tem que passar um objeto com argumento [Destructuring JS]
-const player = new Sprite({
+const player = new Fighter({
     position: {
         x: 0,
         y: 0
@@ -93,7 +57,7 @@ const player = new Sprite({
 
 
 
-const enemy = new Sprite({
+const enemy = new Fighter({
     position: {
         x: 974,
         y: 0
@@ -124,55 +88,7 @@ const keys = { // THIRD TASK  // - não da para ir para direita enquanto vc vai 
     }
 }
 
-// FOURTH TASK - Attacks!!! - para ter a função de ataque de ambos os personagens para não precisar escrever no if abaixo de ataque
-function colisao({ player1, enemy }) {
-    return (
-        player1.attackBox.position.x + player1.attackBox.width >= enemy.position.x &&
-        player1.attackBox.position.x <= enemy.position.x + enemy.width &&
-        player1.attackBox.position.y + player1.attackBox.height >= enemy.position.y &&
-        player1.attackBox.position.y <= enemy.position.y + enemy.height
-    )
-}
 
-
-// SIXTH TASK - Game trigger and game over
-function winner({ player, enemy, timerID }) {
-    clearTimeout(timerID)
-
-    document.querySelector('.c-timer').style.display = 'block';
-
-    if (auxWinner === false) {
-        if (player.health === enemy.health) {
-            document.querySelector('.c-timer').innerHTML = 'EMPATE';
-            auxWinner = true;
-        } else if (player.health > enemy.health) {
-            document.querySelector('.c-timer').innerHTML = 'Jogador 1 Ganhou';
-            auxWinner = true;
-        } else if (enemy.health > player.health) {
-            document.querySelector('.c-timer').innerHTML = 'Jogador 2 Ganhou';
-            auxWinner = true;
-        }
-    }
-}
-
-// SIXTH TASK - Game trigger and game over
-// Diminuir o tempo do jogo
-let timer = 60;
-let timerID;
-let auxWinner = false;
-function decreaseTimer() {
-
-    if (timer > 0) {
-        timerID = setTimeout(decreaseTimer, 1000)
-        timer--
-        document.querySelector('#timer').innerHTML = timer
-    }
-
-    if (timer === 0) {
-        winner({ player, enemy, timerID });
-    }
-
-}
 decreaseTimer();
 
 
@@ -185,6 +101,10 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height); // limpa a tela
 
     // jogadores cairem no chão - desenha-los na tela
+
+    // SEVENTH TASK - Background sprite
+    background.update();
+    baby.update();
     player.update();
     enemy.update();
 
@@ -319,3 +239,4 @@ window.addEventListener('keyup', event => { // faz a verificação de cada tecla
 // FOURTH TASK - Attacks!!!
 // FIFTH TASK - health life!!!
 // SIXTH TASK - Game trigger and game over
+// SEVENTH TASK - Background sprite
