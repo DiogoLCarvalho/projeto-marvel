@@ -52,6 +52,35 @@ const player = new Fighter({
     offset: {
         x: 0,
         y: 0
+    },
+    imgSrc: '../imagens/game/samuraiMack/idle.png',
+    framesMax: 8,
+    scale: 2.5,
+    offset: {
+        x: 215,
+        y: 157
+    },
+    sprites: {
+        idle: {
+            imgSrc: '../imagens/game/samuraiMack/idle.png',
+            framesMax: 8
+        },
+        run: {
+            imgSrc: '../imagens/game/samuraiMack/run.png',
+            framesMax: 8
+        },
+        jump:{
+            imgSrc: '../imagens/game/samuraiMack/jump.png',
+            framesMax: 2
+        },
+        fall:{
+            imgSrc: '../imagens/game/samuraiMack/fall.png',
+            framesMax: 2
+        },
+        attack1:{
+            imgSrc: '../imagens/game/samuraiMack/attack1.png',
+            framesMax: 6
+        }
     }
 });
 
@@ -106,16 +135,30 @@ function animate() {
     background.update();
     baby.update();
     player.update();
-    enemy.update();
+    // enemy.update();
 
     // THIRD TASK - mover para direita e esquerda - com isso vc pode mover duas teclas ao mesmo tempo 
     // Player
     player.velocity.x = 0 // não fica sempre se mexendo
+    
+    // mudar a animação
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5 // velocidade dos jogadores
+        player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5 // velocidade dos jogadores
+        player.switchSprite('run')
+    }else{
+        player.switchSprite('idle')
     }
+
+    // JUMP
+    if (player.velocity.y < 0) {
+        player.switchSprite('jump')
+    } else if (player.velocity.y > 0) { //caindo
+        player.switchSprite('fall')
+    }
+
 
     // Enemy
     enemy.velocity.x = 0

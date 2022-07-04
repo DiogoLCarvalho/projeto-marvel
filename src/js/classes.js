@@ -2,8 +2,8 @@
 
 // Class
 class Sprite {
-    constructor({ position, imgSrc, scale = 1, framesMax = 1}) { 
-        this.position = position 
+    constructor({ position, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+        this.position = position // cada vez que vc instanciar um novo jogador vc podera indicar onde ele esta na tela (canvas)
         this.width = 50
         this.height = 150
         this.image = new Image()
@@ -13,29 +13,42 @@ class Sprite {
         this.framaCurrent = 0
         this.framesChange = 0
         this.framesHold = 8 // mudar a valocidade do baby animado
+        this.offset = offset
     }
 
     draw() {
         // Para animar um elemento vc precisa dividir pelo numero de animações que tera dentro de uma imagem - vc divide a imagem pelos frames
         // c.drawImage(this.image,this.position.x, this.position.y, this.image.width * this.scale , this.image.height * this.scale) sem um elemento de animação
         // SEVENTH TASK - Background sprite
-                                // animar baby 
-        c.drawImage(this.image, this.framaCurrent * (this.image.width/this.framesMax) ,0, this.image.width/this.framesMax,this.image.height,this.position.x, this.position.y, (this.image.width/this.framesMax)* this.scale , this.image.height * this.scale)
+        // animar baby 
+        c.drawImage(
+            this.image,
+            this.framaCurrent * (this.image.width / this.framesMax),
+            0,
+            this.image.width / this.framesMax,
+            this.image.height,
+            this.position.x - this.offset.x,
+            this.position.y - this.offset.y,
+            (this.image.width / this.framesMax) * this.scale,
+            this.image.height * this.scale)
 
     }
 
-
-    update() { 
-        this.draw();
+    animetedFrames() {
         this.framesChange++
 
-        if(this.framesChange % this.framesHold === 0){
+        if (this.framesChange % this.framesHold === 0) {
             if (this.framaCurrent < this.framesMax - 1) {
                 this.framaCurrent++
-            }else{
+            } else {
                 this.framaCurrent = 0
             }
         }
+    }
+
+    update() {
+        this.draw();
+        this.animetedFrames();
 
     }
 }
@@ -44,9 +57,10 @@ class Sprite {
 
 
 // Class
-class Fighter {
-    constructor({ position, velocity, color, offset }) { // passando um objeto = com isso não importa a order
-        this.position = position // cada vez que vc instanciar um novo jogador vc podera indicar onde ele esta na tela (canvas)
+class Fighter extends Sprite {
+    constructor({ position, velocity, color, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites }) { // passando um objeto = com isso não importa a order
+        super({ position, imgSrc, scale, framesMax, offset })
+
         this.velocity = velocity
         this.width = 50
         this.height = 150
@@ -63,21 +77,22 @@ class Fighter {
         this.color = color
         this.isAttacking
         this.health = 100// FIFTH TASK - health life!!!
-    }
+        this.framaCurrent = 0
+        this.framesChange = 0
+        this.framesHold = 9 // mudar a valocidade da animação
+        this.sprites = sprites
 
-    draw() { // colocando o jogador na tela, com a cor, e o posicionamento passado pela instância da classe (50 (largura), 150(altura))
-        c.fillStyle = this.color
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-        // FOURTH TASK
-        if (this.isAttacking) {
-            c.fillStyle = '#FCFC81';
-            c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+        // Mudar as animações do jogador
+        for (const sprite in this.sprites) {
+            sprites[sprite].image = new Image()
+            sprites[sprite].image.src = sprites[sprite].imgSrc
+            console.log(sprites[sprite]);
         }
     }
 
     // FOURTH TASK - Attacks!!! - ativa o ataque por um periodo de tempo
     attacks() {
+        player.switchSprite('attack1')
         this.isAttacking = true
         setTimeout(() => {
             this.isAttacking = false
@@ -86,6 +101,9 @@ class Fighter {
 
     update() { // gravidade, velocidade, "fisica do jogo"
         this.draw();
+        this.animetedFrames();
+
+
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
         this.attackBox.position.y = this.position.y
 
@@ -95,8 +113,70 @@ class Fighter {
         // Não deixar que o player passe a tela     
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 10) { // o - 10 é para ajustar onde os jogadores vão vair no chão de acordo com o background
             this.velocity.y = 0
+            this.position.y = 407 //modificar quando chegar no chão e bug a animação na hora de trocar
         } else {
             this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
         }
     }
+
+    // mudar animações
+    switchSprite(sprite) {
+        // Não chamar o swich, no ataque, se não bug com a animação idle
+        if (player.image === this.sprites.attack1.image && this.framaCurrent < this.sprites.attack1.framesMax -1) { //mover uma vez o ataque
+            return
+        }
+        switch (sprite) {
+            case 'idle':
+                if (this.image !== this.sprites.idle.image) {
+                    this.image = this.sprites.idle.image
+                    this.framesMax = this.sprites.idle.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+            case 'run':
+                if (this.image !== this.sprites.run.image) {
+                    this.image = this.sprites.run.image
+                    this.framesMax = this.sprites.run.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+            case 'jump':
+                if (this.image !== this.sprites.jump.image) {
+                    this.image = this.sprites.jump.image
+                    this.framesMax = this.sprites.jump.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+            case 'fall':
+                if (this.image !== this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image
+                    this.framesMax = this.sprites.fall.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+            case 'attack1':
+                if (this.image !== this.sprites.attack1.image) {
+                    this.image = this.sprites.attack1.image
+                    this.framesMax = this.sprites.attack1.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+
+
+            default:
+                break;
+        }
+    }
 }
+
+// Retangulos!!
+// draw() { // colocando o jogador na tela, com a cor, e o posicionamento passado pela instância da classe (50 (largura), 150(altura))
+//     c.fillStyle = this.color
+//     c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+//     // FOURTH TASK
+//     if (this.isAttacking) {
+//         c.fillStyle = '#FCFC81';
+//         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+//     }
+// }
