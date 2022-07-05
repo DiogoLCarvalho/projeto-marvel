@@ -53,21 +53,21 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/samuraiMack/idle.png',
-    framesMax: 8,
-    scale: 2.5,
+    imgSrc: '../imagens/game/bw/bw_idle.png',
+    framesMax: 11,
+    scale: 2,
     offset: {
         x: 215,
         y: 157
     },
     sprites: {
         idle: {
-            imgSrc: '../imagens/game/samuraiMack/idle.png',
-            framesMax: 8
+            imgSrc: '../imagens/game/bw/bw_idle.png',
+            framesMax: 11
         },
         run: {
-            imgSrc: '../imagens/game/samuraiMack/run.png',
-            framesMax: 8
+            imgSrc: '../imagens/game/bw/bw_run.png',
+            framesMax: 6
         },
         jump:{
             imgSrc: '../imagens/game/samuraiMack/jump.png',
