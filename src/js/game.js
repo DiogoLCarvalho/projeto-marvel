@@ -55,7 +55,7 @@ const player = new Fighter({
     },
     imgSrc: '../imagens/game/bw/bw_idle.png',
     framesMax: 11,
-    scale: 2,
+    scale: 1.8,
     offset: {
         x: 215,
         y: 157
@@ -70,15 +70,15 @@ const player = new Fighter({
             framesMax: 6
         },
         jump:{
-            imgSrc: '../imagens/game/samuraiMack/jump.png',
-            framesMax: 2
+            imgSrc: '../imagens/game/bw/bw_jump.png',
+            framesMax: 4
         },
         fall:{
-            imgSrc: '../imagens/game/samuraiMack/fall.png',
-            framesMax: 2
+            imgSrc: '../imagens/game/bw/bw_fall.png',
+            framesMax: 5
         },
         attack1:{
-            imgSrc: '../imagens/game/samuraiMack/attack1.png',
+            imgSrc: '../imagens/game/bw/bw_attack1.png',
             framesMax: 6
         }
     }
