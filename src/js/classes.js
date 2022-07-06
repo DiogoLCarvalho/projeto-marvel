@@ -26,12 +26,11 @@ class Sprite {
             this.framaCurrent * (this.image.width / this.framesMax),
             0,
             this.image.width / this.framesMax,
-            this.image.height,
+            this.image.height, 
             this.position.x - this.offset.x,
             this.position.y - this.offset.y,
             (this.image.width / this.framesMax) * this.scale,
             this.image.height * this.scale)
-
     }
 
     animetedFrames() {
@@ -50,6 +49,7 @@ class Sprite {
         this.draw();
         this.animetedFrames();
 
+
     }
 }
 
@@ -58,7 +58,7 @@ class Sprite {
 
 // Class
 class Fighter extends Sprite {
-    constructor({ position, velocity, color, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites }) { // passando um objeto = com isso não importa a order
+    constructor({ position, velocity, color, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites, attackBox = { offset: {}, width: undefined, height: undefined }    }) { // passando um objeto = com isso não importa a order
         super({ position, imgSrc, scale, framesMax, offset })
 
         this.velocity = velocity
@@ -70,9 +70,9 @@ class Fighter extends Sprite {
                 x: this.position.x,
                 y: this.position.y
             },
-            offset: offset,
-            width: 100,
-            height: 50
+            offset: attackBox.offset,
+            width: attackBox.width,
+            height: attackBox.height
         }
         this.color = color
         this.isAttacking
@@ -81,6 +81,7 @@ class Fighter extends Sprite {
         this.framesChange = 0
         this.framesHold = 9 // mudar a valocidade da animação
         this.sprites = sprites
+
 
         // Mudar as animações do jogador
         for (const sprite in this.sprites) {
@@ -92,11 +93,8 @@ class Fighter extends Sprite {
 
     // FOURTH TASK - Attacks!!! - ativa o ataque por um periodo de tempo
     attacks() {
-        player.switchSprite('attack1')
+        this.switchSprite('attack1')
         this.isAttacking = true
-        setTimeout(() => {
-            this.isAttacking = false
-        }, 100);
     }
 
     update() { // gravidade, velocidade, "fisica do jogo"
@@ -105,7 +103,10 @@ class Fighter extends Sprite {
 
 
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y
+
+        // Ativar caixa de ataque
+        // c.fillRect(this.attackBox.position.x,this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
         this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
         this.position.y += this.velocity.y
@@ -122,7 +123,7 @@ class Fighter extends Sprite {
     // mudar animações
     switchSprite(sprite) {
         // Não chamar o swich, no ataque, se não bug com a animação idle
-        if (player.image === this.sprites.attack1.image && this.framaCurrent < this.sprites.attack1.framesMax -1) { //mover uma vez o ataque
+        if (this.image === this.sprites.attack1.image && this.framaCurrent < this.sprites.attack1.framesMax - 1) { //mover uma vez o ataque
             return
         }
         switch (sprite) {

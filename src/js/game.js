@@ -25,7 +25,7 @@ const background = new Sprite({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/background_game.png'
+    imgSrc: '../imagens/game/background_game.png',
 })
 const baby = new Sprite({
     position: {
@@ -41,7 +41,7 @@ const baby = new Sprite({
 // Players - vc tem que passar um objeto com argumento [Destructuring JS]
 const player = new Fighter({
     position: {
-        x: 0,
+        x: 200,
         y: 0
     },
     velocity: {
@@ -56,9 +56,9 @@ const player = new Fighter({
     imgSrc: '../imagens/game/bw/bw_idle.png',
     framesMax: 11,
     scale: 1.8,
-    offset: {
+    offset: { //onde ele vai estar no background
         x: 215,
-        y: 157
+        y: 147
     },
     sprites: {
         idle: {
@@ -81,6 +81,14 @@ const player = new Fighter({
             imgSrc: '../imagens/game/bw/bw_attack1.png',
             framesMax: 6
         }
+    }, 
+    attackBox:{
+        offset:{
+            x:100,
+            y:0
+        },
+        width:144,
+        height:50
     }
 });
 
@@ -95,12 +103,49 @@ const enemy = new Fighter({
         x: 0,
         y: 0
     },
-    color: '#3E82FC',
     offset: {
         x: -50,
         y: 0
-    }
+    },
+    imgSrc: '../imagens/game/dp/dp_idle.png',
+    framesMax: 10,
+    scale: 1.8,
+    offset: {
+        x: 215,
+        y: 147
+    },
+    sprites: {
+        idle: {
+            imgSrc: '../imagens/game/dp/dp_idle.png',
+            framesMax: 10
+        },
+        run: {
+            imgSrc: '../imagens/game/dp/dp_run.png',
+            framesMax: 6
+        },
+        jump:{
+            imgSrc: '../imagens/game/dp/dp_jump.png',
+            framesMax: 2
+        },
+        fall:{
+            imgSrc: '../imagens/game/dp/dp_fall.png',
+            framesMax: 2
+        },
+        attack1:{
+            imgSrc: '../imagens/game/dp/dp_attack1.png',
+            framesMax: 6
+        }
+    }, 
+    attackBox:{ // verificar extensão do ataque
+        offset:{
+            x:-200,
+            y:0
+        },
+        width:93,
+        height:50
+    },
 });
+    
 
 const keys = { // THIRD TASK  // - não da para ir para direita enquanto vc vai para a esqueda pq ele esta -1 - para resolver o ploblema: mais os if abaixo
     a: {
@@ -135,7 +180,7 @@ function animate() {
     background.update();
     baby.update();
     player.update();
-    // enemy.update();
+    enemy.update();
 
     // THIRD TASK - mover para direita e esquerda - com isso vc pode mover duas teclas ao mesmo tempo 
     // Player
@@ -152,7 +197,7 @@ function animate() {
         player.switchSprite('idle')
     }
 
-    // JUMP
+    // JUMP - player
     if (player.velocity.y < 0) {
         player.switchSprite('jump')
     } else if (player.velocity.y > 0) { //caindo
@@ -160,12 +205,23 @@ function animate() {
     }
 
 
-    // Enemy
+    // Enemy moviment
     enemy.velocity.x = 0
     if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -5
+        enemy.switchSprite('run')
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
+        enemy.switchSprite('run')
+    }else{
+        enemy.switchSprite('idle')
+    }
+
+    // JUMP - eenmy
+    if (enemy.velocity.y < 0) {
+        enemy.switchSprite('jump')
+    } else if (enemy.velocity.y > 0) { //caindo
+        enemy.switchSprite('fall')
     }
 
 
@@ -176,24 +232,35 @@ function animate() {
         colisao({ player1: player, enemy: enemy }) &&
         player.isAttacking
     ) {
-        player.isAttacking = false // só vai por um ataque de cada vez
+        player.isAttacking = false &&   player.framaCurrent === 4 // só vai por um ataque de cada vez + tempo que tira o dano em questão da animação
 
         // FIFTH TASK - health life!!!
         enemy.health -= 20
         document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
 
+    // Errar ataque
+    if (player.isAttacking && player.framaCurrent === 4) {
+        player.isAttacking = false
+    }
+
+
     // Enemy atacar
     if (
         colisao({ player1: enemy, enemy: player }) &&
         enemy.isAttacking
     ) {
-        enemy.isAttacking = false // só vai por um ataque de cada vez
+        enemy.isAttacking = false &&   player.framaCurrent === 4  // só vai por um ataque de cada vez
 
         // FIFTH TASK - health life!!!
         player.health -= 20
         document.querySelector('#playerHealth').style.width = player.health + '%'
     }
+
+    if (enemy.isAttacking && enemy.framaCurrent === 4) {
+        enemy.isAttacking = false
+    }
+
 
     // SIXTH TASK - Game trigger and game over
     if (player.health <= 0 || enemy.health <= 0) {
