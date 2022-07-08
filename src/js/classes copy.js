@@ -108,6 +108,7 @@ class Fighter extends Sprite {
         this.isAttacking = true
     }
 
+    // Mudar aqui
     update() { // gravidade, velocidade, "fisica do jogo"
 
         this.draw();
@@ -178,56 +179,6 @@ class Fighter extends Sprite {
             default:
                 break;
         }
-    }
-
-    // virar o personagem ao contrario
-    updateEnemy() {
-        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-        this.attackBox.position.y = this.position.y + this.attackBox.offset.y
-
-        // Ativar caixa de ataque
-        // c.fillRect(this.attackBox.position.x,this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-        
-        // Virar o personagem
-		c.scale(-1, 1);       
-
-        this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
-        this.position.y += this.velocity.y
-
-        // Não deixar que o player passe a tela     
-        if (this.position.y + this.height + this.velocity.y >= canvas.height - 10) { // o - 10 é para ajustar onde os jogadores vão vair no chão de acordo com o background
-            this.velocity.y = 0
-            this.position.y = 407 //modificar quando chegar no chão e bug a animação na hora de trocar
-        } else {
-            this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
-        }
-
-
-        this.flipHorizontally();
-        this.animetedFrames();
-    }
-
-    // virar o personagem ao contrario
-    flipHorizontally() {
-        
-        // c.save();
-        // c.restore();
-
-        // ajuste da imagem do personagem espelhada  
-        c.translate(-300, 0);
-
-        c.drawImage(
-            this.image,
-            this.framaCurrent * (this.image.width / this.framesMax),
-            0,
-            this.image.width / this.framesMax,
-            this.image.height,
-            (this.position.x - this.offset.x) * -1,
-            this.position.y - this.offset.y,
-            (this.image.width / this.framesMax) * this.scale,
-            this.image.height * this.scale)
-
-		c.setTransform(1, 0, 0, 1, 0, 0);
     }
 
 }

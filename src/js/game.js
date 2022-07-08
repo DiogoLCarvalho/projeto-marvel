@@ -12,7 +12,6 @@ c.fillRect(0, 0, canvas.width, canvas.height) // black background
 
 
 
-
 // SECOND TASK - Create a player and enemy - programação orientada a objeto
 
 const gravity = 0.7; // gravidade para o jogador sempre cair
@@ -55,7 +54,7 @@ const player = new Fighter({
     },
     imgSrc: '../imagens/game/bw/bw_idle.png',
     framesMax: 11,
-    scale: 1.8,
+    scale: 1.8 ,
     offset: { //onde ele vai estar no background
         x: 215,
         y: 147
@@ -93,10 +92,9 @@ const player = new Fighter({
 });
 
 
-
 const enemy = new Fighter({
     position: {
-        x: 974,
+        x: 974 ,
         y: 0
     },
     velocity: {
@@ -143,9 +141,10 @@ const enemy = new Fighter({
         },
         width:93,
         height:50
-    },
+    }
 });
     
+
 
 const keys = { // THIRD TASK  // - não da para ir para direita enquanto vc vai para a esqueda pq ele esta -1 - para resolver o ploblema: mais os if abaixo
     a: {
@@ -180,7 +179,8 @@ function animate() {
     background.update();
     baby.update();
     player.update();
-    enemy.update();
+    enemy.updateEnemy(); //Imagem espelhada
+
 
     // THIRD TASK - mover para direita e esquerda - com isso vc pode mover duas teclas ao mesmo tempo 
     // Player
