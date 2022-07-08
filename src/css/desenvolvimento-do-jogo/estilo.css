@@ -1,10 +1,28 @@
-*{
+@import url('../fontes.css');
+
+* {
     box-sizing: border-box;
+    border: 0px;
+    margin: 0px;
+}
+
+body {
+    background: rgb(25 22 22);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .l-main {
+    font-family: 'ssf4', 'Courier New', Courier, monospace;
     position: relative;
     display: inline-block;
+}
+
+canvas {
+    border: 4mm ridge white;
 }
 
 .l-main__container {
@@ -15,58 +33,67 @@
     padding: 20px;
 }
 
-.l-container{
+.l-container {
     position: relative;
     width: 100%;
-    height: 30px;
-}
-
-.c-container__healthBar-Enemy, .c-container__healthBar-Player {
-    height: inherit;
-    background-color: goldenrod;
+    border: 4px solid white;
     margin: 0px 10px;
 }
 
+.c-container__healthBar-Enemy,
+.c-container__healthBar-Player {
+    height: inherit;
+    background-color: #dc2626;
+    height: 30px;
+}
+
 /* Trocando  a direção */
-.right-side{
+.right-side {
     display: flex;
     justify-content: flex-end;
 }
 
-#playerHealth{
+#playerHealth {
     width: 100%;
     left: inherit;
 }
-.c-container__healthBar-Player{
+
+.c-container__healthBar-Player {
     width: 100%;
 }
 
-.c-container__healthBar-bottom{
+.c-container__healthBar-bottom {
     position: absolute;
-    background-color: cadetblue;
+    background-color: #fde047;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    margin: 0px 10px;
 }
 
 .c-container__timer {
-    background-color: red;
+    background-color: #1c1917;
+    color: white;
     width: 100px;
-    height: 100px;
+    height: 50px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 4px solid white;
+    border-radius: 5px;
 }
 
 
-.c-timer{
+.c-timer {
     position: absolute;
+    font-size: 300%;
     color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     display: none;
 }

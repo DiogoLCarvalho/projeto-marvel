@@ -36,7 +36,7 @@ class Sprite {
             this.position.y - this.offset.y,
             (this.image.width / this.framesMax) * this.scale,
             this.image.height * this.scale)
-        
+
     }
 
 
@@ -90,15 +90,12 @@ class Fighter extends Sprite {
         this.framesHold = 9 // mudar a valocidade da animação
         this.sprites = sprites
         this.reverse = -1
-
+        this.dead = false
 
         // Mudar as animações do jogador
         for (const sprite in this.sprites) {
             sprites[sprite].image = new Image()
             sprites[sprite].image.src = sprites[sprite].imgSrc
-
-
-            console.log(sprites[sprite]);
         }
     }
 
@@ -108,10 +105,26 @@ class Fighter extends Sprite {
         this.isAttacking = true
     }
 
+    takeHit() {
+        this.health -= 20 //quantidade que tira vida
+
+
+        // Animação de derrota e dano
+        if (this.health <= 0) {
+            this.switchSprite('death')
+        } else {
+            this.switchSprite('takeHit');
+        }
+    }
+
+
+
     update() { // gravidade, velocidade, "fisica do jogo"
 
         this.draw();
-        this.animetedFrames();
+        if (!this.dead) { //parar a animação ao morrer
+            this.animetedFrames();
+        }
 
 
 
@@ -131,12 +144,28 @@ class Fighter extends Sprite {
         } else {
             this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
         }
+
+        if (this.position.x + this.width + this.velocity.x >= canvas.width - 10) {
+            
+        }
     }
 
     // mudar animações
     switchSprite(sprite) {
+
         // Não chamar o swich, no ataque, se não bug com a animação idle
         if (this.image === this.sprites.attack1.image && this.framaCurrent < this.sprites.attack1.framesMax - 1) { //mover uma vez o ataque
+            return
+        }
+        // Quando o jogador é atacado - sobreescreva todas as animações
+        if (this.image === this.sprites.takeHit.image && this.framaCurrent < this.sprites.takeHit.framesMax - 1) {
+            return
+        }
+        // Não chamar o swich, no ataque, se não bug com a animação idle
+        if (this.image === this.sprites.death.image) {
+            if (this.framaCurrent === this.sprites.death.framesMax - 1) {
+                this.dead = true
+            }
             return
         }
         switch (sprite) {
@@ -175,6 +204,20 @@ class Fighter extends Sprite {
                     this.framaCurrent = 0
                 }
                 break;
+            case 'takeHit':
+                if (this.image !== this.sprites.takeHit.image) {
+                    this.image = this.sprites.takeHit.image
+                    this.framesMax = this.sprites.takeHit.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
+            case 'death':
+                if (this.image !== this.sprites.death.image) {
+                    this.image = this.sprites.death.image
+                    this.framesMax = this.sprites.death.framesMax  //sobreescreve os frames
+                    this.framaCurrent = 0
+                }
+                break;
             default:
                 break;
         }
@@ -187,9 +230,9 @@ class Fighter extends Sprite {
 
         // Ativar caixa de ataque
         // c.fillRect(this.attackBox.position.x,this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-        
+
         // Virar o personagem
-		c.scale(-1, 1);       
+        c.scale(-1, 1);
 
         this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
         this.position.y += this.velocity.y
@@ -204,12 +247,14 @@ class Fighter extends Sprite {
 
 
         this.flipHorizontally();
-        this.animetedFrames();
+        if (!this.dead) {  //parar a animação ao morrer
+            this.animetedFrames();
+        }
     }
 
     // virar o personagem ao contrario
     flipHorizontally() {
-        
+
         // c.save();
         // c.restore();
 
@@ -227,8 +272,9 @@ class Fighter extends Sprite {
             (this.image.width / this.framesMax) * this.scale,
             this.image.height * this.scale)
 
-		c.setTransform(1, 0, 0, 1, 0, 0);
+        c.setTransform(1, 0, 0, 1, 0, 0);
     }
+
 
 }
 

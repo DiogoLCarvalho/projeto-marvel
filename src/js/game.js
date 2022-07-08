@@ -54,7 +54,7 @@ const player = new Fighter({
     },
     imgSrc: '../imagens/game/bw/bw_idle.png',
     framesMax: 11,
-    scale: 1.8 ,
+    scale: 1.8,
     offset: { //onde ele vai estar no background
         x: 215,
         y: 147
@@ -68,33 +68,41 @@ const player = new Fighter({
             imgSrc: '../imagens/game/bw/bw_run.png',
             framesMax: 6
         },
-        jump:{
+        jump: {
             imgSrc: '../imagens/game/bw/bw_jump.png',
             framesMax: 4
         },
-        fall:{
+        fall: {
             imgSrc: '../imagens/game/bw/bw_fall.png',
             framesMax: 5
         },
-        attack1:{
+        attack1: {
             imgSrc: '../imagens/game/bw/bw_attack1.png',
             framesMax: 6
-        }
-    }, 
-    attackBox:{
-        offset:{
-            x:100,
-            y:0
         },
-        width:144,
-        height:50
+        takeHit: {
+            imgSrc: '../imagens/game/bw/bw_takehit.png',
+            framesMax: 3
+        },
+        death: {
+            imgSrc: '../imagens/game/bw/bw_death.png',
+            framesMax: 4
+        }
+    },
+    attackBox: {
+        offset: {
+            x: 100,
+            y: 0
+        },
+        width: 144,
+        height: 50
     }
 });
 
 
 const enemy = new Fighter({
     position: {
-        x: 974 ,
+        x: 974,
         y: 0
     },
     velocity: {
@@ -121,29 +129,37 @@ const enemy = new Fighter({
             imgSrc: '../imagens/game/dp/dp_run.png',
             framesMax: 6
         },
-        jump:{
+        jump: {
             imgSrc: '../imagens/game/dp/dp_jump.png',
             framesMax: 2
         },
-        fall:{
+        fall: {
             imgSrc: '../imagens/game/dp/dp_fall.png',
             framesMax: 2
         },
-        attack1:{
+        attack1: {
             imgSrc: '../imagens/game/dp/dp_attack1.png',
             framesMax: 6
-        }
-    }, 
-    attackBox:{ // verificar extensão do ataque
-        offset:{
-            x:-200,
-            y:0
         },
-        width:93,
-        height:50
+        takeHit: {
+            imgSrc: '../imagens/game/dp/dp_takehit.png',
+            framesMax: 3
+        },
+        death: {
+            imgSrc: '../imagens/game/dp/dp_death.png',
+            framesMax: 4
+        }
+    },
+    attackBox: { // verificar extensão do ataque
+        offset: {
+            x: -200,
+            y: 0
+        },
+        width: 100,
+        height: 50
     }
 });
-    
+
 
 
 const keys = { // THIRD TASK  // - não da para ir para direita enquanto vc vai para a esqueda pq ele esta -1 - para resolver o ploblema: mais os if abaixo
@@ -178,6 +194,9 @@ function animate() {
     // SEVENTH TASK - Background sprite
     background.update();
     baby.update();
+    // deixar fundo mais branco
+    c.fillStyle = 'rgba(255,255,255,0.030)';
+    c.fillRect(0, 0, canvas.width, canvas.height)
     player.update();
     enemy.updateEnemy(); //Imagem espelhada
 
@@ -185,7 +204,7 @@ function animate() {
     // THIRD TASK - mover para direita e esquerda - com isso vc pode mover duas teclas ao mesmo tempo 
     // Player
     player.velocity.x = 0 // não fica sempre se mexendo
-    
+
     // mudar a animação
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5 // velocidade dos jogadores
@@ -193,7 +212,7 @@ function animate() {
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5 // velocidade dos jogadores
         player.switchSprite('run')
-    }else{
+    } else {
         player.switchSprite('idle')
     }
 
@@ -213,7 +232,7 @@ function animate() {
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
         enemy.switchSprite('run')
-    }else{
+    } else {
         enemy.switchSprite('idle')
     }
 
@@ -229,14 +248,23 @@ function animate() {
     // FOURTH TASK - Attacks!!!
     // Player atacar
     if (
-        colisao({ player1: player, enemy: enemy }) &&
-        player.isAttacking
+        colisao({
+            player1: player,
+            enemy: enemy
+        }) &&
+        player.isAttacking &&
+        player.framaCurrent === 4  // só vai por um ataque de cada vez + tempo que tira o dano em questão da animação
     ) {
-        player.isAttacking = false &&   player.framaCurrent === 4 // só vai por um ataque de cada vez + tempo que tira o dano em questão da animação
 
         // FIFTH TASK - health life!!!
-        enemy.health -= 20
-        document.querySelector('#enemyHealth').style.width = enemy.health + '%'
+        enemy.takeHit();
+        player.isAttacking = false
+
+        // Animar com a biblioteca
+        gsap.to('#enemyHealth', {
+            width: enemy.health + '%'
+        })
+        // document.querySelector('#enemyHealth').style.width = enemy.health + '%'
     }
 
     // Errar ataque
@@ -247,16 +275,26 @@ function animate() {
 
     // Enemy atacar
     if (
-        colisao({ player1: enemy, enemy: player }) &&
-        enemy.isAttacking
+        colisao({
+            player1: player,
+            enemy: enemy
+        }) &&
+        enemy.isAttacking &&
+        enemy.framaCurrent === 4  // só vai por um ataque de cada vez + tempo que tira o dano em questão da animação
     ) {
-        enemy.isAttacking = false &&   player.framaCurrent === 4  // só vai por um ataque de cada vez
 
         // FIFTH TASK - health life!!!
-        player.health -= 20
-        document.querySelector('#playerHealth').style.width = player.health + '%'
+        player.takeHit();
+        enemy.isAttacking = false
+
+        // Animar com a biblioteca
+        gsap.to('#playerHealth', {
+            width: player.health + '%'
+        })
+        // document.querySelector('#playerHealth').style.width = player.health + '%'
     }
 
+    // Errar ataque
     if (enemy.isAttacking && enemy.framaCurrent === 4) {
         enemy.isAttacking = false
     }
@@ -279,47 +317,51 @@ animate();
 
 window.addEventListener('keydown', event => { // faz a verificação de cada tecla que vc clicar no teclado
 
-    switch (event.key) {
-        case 'd': // ir para direita
-            keys.d.pressed = true
-            player.lastKey = 'd'
-            break;
-        case 'a': // ir para esquerda
-            keys.a.pressed = true
-            player.lastKey = 'a'
-            break;
-        case 'w': // jump - sempre vai para baixo por conta da gravidade
-            player.velocity.y = -10
-            break;
-        case ' ': // FOURTH TASK - ativar ataque
-            player.attacks();
-            break;
-
-
-
-        // Enemy
-        case 'ArrowRight':
-            keys.ArrowRight.pressed = true
-            enemy.lastKey = 'ArrowRight'
-            break;
-        case 'ArrowLeft':
-            keys.ArrowLeft.pressed = true
-            enemy.lastKey = 'ArrowLeft'
-            break;
-        case 'ArrowUp':
-            enemy.velocity.y = -10
-            break;
-        case 'ArrowDown': // FOURTH TASK - ativar ataque
-            enemy.attacks();
-            break;
-        default:
-            break;
+    // Se um ganhar o outro pode se mexer
+    if (!player.dead) {
+        switch (event.key) {
+            case 'd': // ir para direita
+                keys.d.pressed = true
+                player.lastKey = 'd'
+                break;
+            case 'a': // ir para esquerda
+                keys.a.pressed = true
+                player.lastKey = 'a'
+                break;
+            case 'w': // jump - sempre vai para baixo por conta da gravidade
+                player.velocity.y = -10
+                break;
+            case ' ': // FOURTH TASK - ativar ataque
+                player.attacks();
+                break;
+        }
     }
 
+
+    if (!enemy.dead) {
+        // Enemy
+        switch (event.key) {
+            case 'ArrowRight':
+                keys.ArrowRight.pressed = true
+                enemy.lastKey = 'ArrowRight'
+                break;
+            case 'ArrowLeft':
+                keys.ArrowLeft.pressed = true
+                enemy.lastKey = 'ArrowLeft'
+                break;
+            case 'ArrowUp':
+                enemy.velocity.y = -10
+                break;
+            case 'ArrowDown': // FOURTH TASK - ativar ataque
+                enemy.attacks();
+                break;
+            default:
+                break;
+        }
+    }
 });
 
 window.addEventListener('keyup', event => { // faz a verificação de cada tecla que vc clicar no teclado
-
     switch (event.key) {
         case 'd':
             keys.d.pressed = false
