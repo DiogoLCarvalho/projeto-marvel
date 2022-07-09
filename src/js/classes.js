@@ -2,7 +2,7 @@
 
 // Class
 class Sprite {
-    constructor({ position, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+    constructor({ position, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, framesHold = 8 }) {
         this.position = position // cada vez que vc instanciar um novo jogador vc podera indicar onde ele esta na tela (canvas)
         this.width = 50
         this.height = 150
@@ -12,7 +12,7 @@ class Sprite {
         this.framesMax = framesMax
         this.framaCurrent = 0
         this.framesChange = 0
-        this.framesHold = 8 // mudar a valocidade do baby animado
+        this.framesHold = framesHold // mudar a valocidade do baby animado
         this.offset = offset
     }
 
@@ -141,8 +141,8 @@ class Fighter extends Sprite {
         }
 
         // console.log(this.position.x + this.width + this.velocity.x );
-
         this.position.y += this.velocity.y
+
 
         // Não deixar que o player passe a tela     
         if (this.position.y + this.height + this.velocity.y >= canvas.height - 10) { // o - 10 é para ajustar onde os jogadores vão vair no chão de acordo com o background
@@ -151,6 +151,7 @@ class Fighter extends Sprite {
         } else {
             this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
         }
+
 
     }
 
@@ -237,7 +238,7 @@ class Fighter extends Sprite {
 
         // Virar o personagem
         c.scale(-1, 1);
-        
+
         //  THREE TASK  - mover x do jogador - não deixa ultrapassar a borda
         if (!(this.position.x + this.width + this.velocity.x >= canvas.width + 50)) {
             if (!(this.position.x + this.width + this.velocity.x <= 160)) {

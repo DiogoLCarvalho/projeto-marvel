@@ -18,6 +18,7 @@ function winner({ player, enemy, timerID }) {
     if (auxWinner === false) {
         if (player.health === enemy.health) {
             document.querySelector('.c-timer').innerHTML = 'EMPATE';
+            blockControl = true;
             auxWinner = true;
         } else if (player.health > enemy.health) {
             document.querySelector('.c-timer').innerHTML = 'Jogador 1 Ganhou';

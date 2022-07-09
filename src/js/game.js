@@ -25,15 +25,17 @@ const background = new Sprite({
         y: 0
     },
     imgSrc: '../imagens/game/background_game.png',
-})
+});
+
 const baby = new Sprite({
     position: {
         x: 260,
-        y: 430
+        y: 115
     },
-    imgSrc: '../imagens/game/baby_crying.png',
-    scale: 1.2,
-    framesMax: 8
+    imgSrc: '../imagens/game/dormammu.png',
+    scale: 1.5,
+    framesMax: 10,
+    framesHold: 7
 })
 
 
@@ -41,7 +43,7 @@ const baby = new Sprite({
 const player = new Fighter({
     position: {
         x: 200,
-        y: 0
+        y: 400
     },
     velocity: {
         x: 0,
@@ -103,7 +105,7 @@ const player = new Fighter({
 const enemy = new Fighter({
     position: {
         x: 954,
-        y: 0
+        y: 400
     },
     velocity: {
         x: 0,
@@ -312,53 +314,65 @@ animate();
 
 
 
+var blockControl = false;
+var jumpCount = 0;
+var jumpMax = 2;
 
 // THIRD  TASK - Mover personagens - event listeners
 
 window.addEventListener('keydown', event => { // faz a verificação de cada tecla que vc clicar no teclado
+    if (!blockControl) {
 
-    // Se um ganhar o outro pode se mexer
-    if (!player.dead) {
-        switch (event.key) {
-            case 'd': // ir para direita
-                keys.d.pressed = true
-                player.lastKey = 'd'
-                break;
-            case 'a': // ir para esquerda
-                keys.a.pressed = true
-                player.lastKey = 'a'
-                break;
-            case 'w': // jump - sempre vai para baixo por conta da gravidade
-                player.velocity.y = -10
-                break;
-            case ' ': // FOURTH TASK - ativar ataque
-                player.attacks();
-                break;
+        // Se um ganhar o outro pode se mexer
+        if (!player.dead) {
+            switch (event.key) {
+                case 'd': // ir para direita
+                    keys.d.pressed = true
+                    player.lastKey = 'd'
+                    break;
+                case 'a': // ir para esquerda
+                    keys.a.pressed = true
+                    player.lastKey = 'a'
+                    break;
+                case 'w': // jump - sempre vai para baixo por conta da gravidade
+
+                    // Pular uma vez
+                    if (player.velocity.y === 0) {
+                        player.velocity.y = -14;
+                    }
+                    break;
+                case ' ': // FOURTH TASK - ativar ataque
+                    player.attacks();
+                    break;
+            }
+        }
+
+
+        if (!enemy.dead) {
+            // Enemy
+            switch (event.key) {
+                case 'ArrowRight':
+                    keys.ArrowRight.pressed = true
+                    enemy.lastKey = 'ArrowRight'
+                    break;
+                case 'ArrowLeft':
+                    keys.ArrowLeft.pressed = true
+                    enemy.lastKey = 'ArrowLeft'
+                    break;
+                case 'ArrowUp':
+                    if (enemy.velocity.y === 0) {
+                        enemy.velocity.y = -14
+                    }
+                    break;
+                case 'ArrowDown': // FOURTH TASK - ativar ataque
+                    enemy.attacks();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
-
-    if (!enemy.dead) {
-        // Enemy
-        switch (event.key) {
-            case 'ArrowRight':
-                keys.ArrowRight.pressed = true
-                enemy.lastKey = 'ArrowRight'
-                break;
-            case 'ArrowLeft':
-                keys.ArrowLeft.pressed = true
-                enemy.lastKey = 'ArrowLeft'
-                break;
-            case 'ArrowUp':
-                enemy.velocity.y = -10
-                break;
-            case 'ArrowDown': // FOURTH TASK - ativar ataque
-                enemy.attacks();
-                break;
-            default:
-                break;
-        }
-    }
 });
 
 window.addEventListener('keyup', event => { // faz a verificação de cada tecla que vc clicar no teclado
