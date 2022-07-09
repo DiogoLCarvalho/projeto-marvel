@@ -106,8 +106,7 @@ class Fighter extends Sprite {
     }
 
     takeHit() {
-        this.health -= 20 //quantidade que tira vida
-
+        this.health -= 10 //quantidade que tira vida
 
         // Animação de derrota e dano
         if (this.health <= 0) {
@@ -134,7 +133,15 @@ class Fighter extends Sprite {
         // Ativar caixa de ataque
         // c.fillRect(this.attackBox.position.x,this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
-        this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
+        //  THREE TASK  - mover x do jogador - não deixa ultrapassar a borda
+        if (!(this.position.x + this.width + this.velocity.x >= canvas.width - 10)) {
+            if (!(this.position.x + this.width + this.velocity.x <= 160)) {
+                this.position.x += this.velocity.x
+            }
+        }
+
+        // console.log(this.position.x + this.width + this.velocity.x );
+
         this.position.y += this.velocity.y
 
         // Não deixar que o player passe a tela     
@@ -145,9 +152,6 @@ class Fighter extends Sprite {
             this.velocity.y += gravity // o jogador sempre vai cair no Y, por conta da gravidade. Vc não precisa colocar nada na instancia dele
         }
 
-        if (this.position.x + this.width + this.velocity.x >= canvas.width - 10) {
-            
-        }
     }
 
     // mudar animações
@@ -233,8 +237,14 @@ class Fighter extends Sprite {
 
         // Virar o personagem
         c.scale(-1, 1);
+        
+        //  THREE TASK  - mover x do jogador - não deixa ultrapassar a borda
+        if (!(this.position.x + this.width + this.velocity.x >= canvas.width + 50)) {
+            if (!(this.position.x + this.width + this.velocity.x <= 160)) {
+                this.position.x += this.velocity.x
+            }
+        }
 
-        this.position.x += this.velocity.x //  THREE TASK  - mover x do jogador
         this.position.y += this.velocity.y
 
         // Não deixar que o player passe a tela     
