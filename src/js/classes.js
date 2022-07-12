@@ -16,10 +16,6 @@ class Sprite {
         this.offset = offset
     }
 
-
-
-
-
     draw() {
         // Para animar um elemento vc precisa dividir pelo numero de animações que tera dentro de uma imagem - vc divide a imagem pelos frames
         // c.drawImage(this.image,this.position.x, this.position.y, this.image.width * this.scale , this.image.height * this.scale) sem um elemento de animação
@@ -66,8 +62,8 @@ class Sprite {
 
 // Class
 class Fighter extends Sprite {
-    constructor({ position, velocity, color, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites, attackBox = { offset: {}, width: undefined, height: undefined } }) { // passando um objeto = com isso não importa a order
-        super({ position, imgSrc, scale, framesMax, offset })
+    constructor({ position, velocity, color, imgSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 }, sprites, framesHold = 8, attackBox = { offset: {}, width: undefined, height: undefined } }) { // passando um objeto = com isso não importa a order
+        super({ position, imgSrc, scale, framesMax, offset, framesHold })
 
         this.velocity = velocity
         this.width = 50
@@ -91,6 +87,7 @@ class Fighter extends Sprite {
         this.sprites = sprites
         this.reverse = -1
         this.dead = false
+        this.framesHold = framesHold // mudar a valocidade da animação
 
         // Mudar as animações do jogador
         for (const sprite in this.sprites) {
