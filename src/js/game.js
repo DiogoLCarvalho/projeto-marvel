@@ -54,8 +54,8 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/de/de_idle.png',
-    framesMax: 9,
+    imgSrc: '../imagens/game/fe/fe_idle.png',
+    framesMax: 6,
     framesHold:10,
     scale: 1.8,
     offset: { //onde ele vai estar no background
@@ -64,31 +64,31 @@ const player = new Fighter({
     },
     sprites: {
         idle: {
-            imgSrc: '../imagens/game/de/de_idle.png',
-            framesMax: 9
+            imgSrc: '../imagens/game/fe/fe_idle.png',
+            framesMax: 6
         },
         run: {
-            imgSrc: '../imagens/game/de/de_run.png',
-            framesMax: 5
+            imgSrc: '../imagens/game/fe/fe_run.png',
+            framesMax: 3
         },
         jump: {
-            imgSrc: '../imagens/game/de/de_jump.png',
+            imgSrc: '../imagens/game/fe/fe_jump.png',
             framesMax: 1
         },
         fall: {
-            imgSrc: '../imagens/game/de/de_fall.png',
+            imgSrc: '../imagens/game/fe/fe_fall.png',
             framesMax: 1
         },
         attack1: {
-            imgSrc: '../imagens/game/de/de_attack1.png',
-            framesMax: 6
+            imgSrc: '../imagens/game/fe/fe_attack1.png',
+            framesMax: 8
         },
         takeHit: {
-            imgSrc: '../imagens/game/de/de_takehit.png',
+            imgSrc: '../imagens/game/fe/fe_takehit.png',
             framesMax: 3
         },
         death: {
-            imgSrc: '../imagens/game/mk/mk_death.png',
+            imgSrc: '../imagens/game/fe/fe_death.png',
             framesMax: 3
         }
     },
