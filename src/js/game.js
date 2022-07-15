@@ -54,11 +54,72 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/fe/fe_idle.png',
-    framesMax: 6,
+    imgSrc: '../imagens/game/te/te_idle.png',
+    framesMax: 10,
     framesHold:10,
     scale: 1.8,
     offset: { //onde ele vai estar no background
+        x: 215,
+        y: 147
+    },
+    sprites: {
+        idle: {
+            imgSrc: '../imagens/game/te/te_idle.png',
+            framesMax: 10
+        },
+        run: {
+            imgSrc: '../imagens/game/te/te_run.png',
+            framesMax: 10
+        },
+        jump: {
+            imgSrc: '../imagens/game/te/te_jump.png',
+            framesMax: 1
+        },
+        fall: {
+            imgSrc: '../imagens/game/te/te_fall.png',
+            framesMax: 1
+        },
+        attack1: {
+            imgSrc: '../imagens/game/te/te_attack1.png',
+            framesMax: 6
+        },
+        takeHit: {
+            imgSrc: '../imagens/game/te/te_takehit.png',
+            framesMax: 3
+        },
+        death: {
+            imgSrc: '../imagens/game/te/te_death.png',
+            framesMax: 1
+        }
+    },
+    attackBox: {
+        offset: {
+            x: 100,
+            y: 0
+        },
+        width: 144,
+        height: 50
+    }
+});
+
+
+const enemy = new Fighter({
+    position: {
+        x: 954,
+        y: 400
+    },
+    velocity: {
+        x: 0,
+        y: 0
+    },
+    offset: {
+        x: -50,
+        y: 0
+    },
+    imgSrc: '../imagens/game/fe/fe_idle.png',
+    framesMax: 6,
+    scale: 1.8,
+    offset: {
         x: 215,
         y: 147
     },
@@ -90,67 +151,6 @@ const player = new Fighter({
         death: {
             imgSrc: '../imagens/game/fe/fe_death.png',
             framesMax: 3
-        }
-    },
-    attackBox: {
-        offset: {
-            x: 100,
-            y: 0
-        },
-        width: 144,
-        height: 50
-    }
-});
-
-
-const enemy = new Fighter({
-    position: {
-        x: 954,
-        y: 400
-    },
-    velocity: {
-        x: 0,
-        y: 0
-    },
-    offset: {
-        x: -50,
-        y: 0
-    },
-    imgSrc: '../imagens/game/dp/dp_idle.png',
-    framesMax: 10,
-    scale: 1.8,
-    offset: {
-        x: 215,
-        y: 147
-    },
-    sprites: {
-        idle: {
-            imgSrc: '../imagens/game/dp/dp_idle.png',
-            framesMax: 10
-        },
-        run: {
-            imgSrc: '../imagens/game/dp/dp_run.png',
-            framesMax: 6
-        },
-        jump: {
-            imgSrc: '../imagens/game/dp/dp_jump.png',
-            framesMax: 2
-        },
-        fall: {
-            imgSrc: '../imagens/game/dp/dp_fall.png',
-            framesMax: 2
-        },
-        attack1: {
-            imgSrc: '../imagens/game/dp/dp_attack1.png',
-            framesMax: 6
-        },
-        takeHit: {
-            imgSrc: '../imagens/game/dp/dp_takehit.png',
-            framesMax: 3
-        },
-        death: {
-            imgSrc: '../imagens/game/dp/dp_death.png',
-            framesMax: 4
         }
     },
     attackBox: { // verificar extensão do ataque
