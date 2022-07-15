@@ -1,6 +1,4 @@
-
 // FIRST TASK - Project setup
-
 const canvas = document.querySelector('canvas'); // onde o desenho vai acontecer
 const c = canvas.getContext('2d'); // Returns an object that provides methods and properties for drawing and manipulating images and graphics on a canvas element in a document.
 
@@ -27,7 +25,7 @@ const background = new Sprite({
     imgSrc: '../imagens/game/background_game.png',
 });
 
-const baby = new Sprite({
+const characterBack = new Sprite({
     position: {
         x: 260,
         y: 115
@@ -54,8 +52,8 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/te/te_idle.png',
-    framesMax: 10,
+    imgSrc: '../imagens/game/hf/hf_idle.png',
+    framesMax: 9,
     framesHold:10,
     scale: 1.8,
     offset: { //onde ele vai estar no background
@@ -64,31 +62,31 @@ const player = new Fighter({
     },
     sprites: {
         idle: {
-            imgSrc: '../imagens/game/te/te_idle.png',
-            framesMax: 10
+            imgSrc: '../imagens/game/hf/hf_idle.png',
+            framesMax: 9
         },
         run: {
-            imgSrc: '../imagens/game/te/te_run.png',
-            framesMax: 10
+            imgSrc: '../imagens/game/hf/hf_run.png',
+            framesMax: 2
         },
         jump: {
-            imgSrc: '../imagens/game/te/te_jump.png',
-            framesMax: 1
+            imgSrc: '../imagens/game/hf/hf_jump.png',
+            framesMax: 2
         },
         fall: {
-            imgSrc: '../imagens/game/te/te_fall.png',
+            imgSrc: '../imagens/game/hf/hf_fall.png',
             framesMax: 1
         },
         attack1: {
-            imgSrc: '../imagens/game/te/te_attack1.png',
+            imgSrc: '../imagens/game/hf/hf_attack1.png',
             framesMax: 6
         },
         takeHit: {
-            imgSrc: '../imagens/game/te/te_takehit.png',
+            imgSrc: '../imagens/game/hf/hf_takehit.png',
             framesMax: 3
         },
         death: {
-            imgSrc: '../imagens/game/te/te_death.png',
+            imgSrc: '../imagens/game/hf/hf_death.png',
             framesMax: 1
         }
     },
@@ -116,8 +114,8 @@ const enemy = new Fighter({
         x: -50,
         y: 0
     },
-    imgSrc: '../imagens/game/fe/fe_idle.png',
-    framesMax: 6,
+    imgSrc: '../imagens/game/bw/bw_idle.png',
+    framesMax: 11,
     scale: 1.8,
     offset: {
         x: 215,
@@ -125,32 +123,32 @@ const enemy = new Fighter({
     },
     sprites: {
         idle: {
-            imgSrc: '../imagens/game/fe/fe_idle.png',
-            framesMax: 6
+            imgSrc: '../imagens/game/bw/bw_idle.png',
+            framesMax: 11
         },
         run: {
-            imgSrc: '../imagens/game/fe/fe_run.png',
-            framesMax: 3
+            imgSrc: '../imagens/game/bw/bw_run.png',
+            framesMax: 6
         },
         jump: {
-            imgSrc: '../imagens/game/fe/fe_jump.png',
-            framesMax: 1
+            imgSrc: '../imagens/game/bw/bw_jump.png',
+            framesMax: 4
         },
         fall: {
-            imgSrc: '../imagens/game/fe/fe_fall.png',
-            framesMax: 1
+            imgSrc: '../imagens/game/bw/bw_fall.png',
+            framesMax: 5
         },
         attack1: {
-            imgSrc: '../imagens/game/fe/fe_attack1.png',
-            framesMax: 8
+            imgSrc: '../imagens/game/bw/bw_attack1.png',
+            framesMax: 6
         },
         takeHit: {
-            imgSrc: '../imagens/game/fe/fe_takehit.png',
+            imgSrc: '../imagens/game/bw/bw_takehit.png',
             framesMax: 3
         },
         death: {
-            imgSrc: '../imagens/game/fe/fe_death.png',
-            framesMax: 3
+            imgSrc: '../imagens/game/bw/bw_death.png',
+            framesMax: 4
         }
     },
     attackBox: { // verificar extensão do ataque
@@ -196,10 +194,12 @@ function animate() {
 
     // SEVENTH TASK - Background sprite
     background.update();
-    baby.update();
+    characterBack.update();
+
     // deixar fundo mais branco
     c.fillStyle = 'rgba(255,255,255,0.030)';
     c.fillRect(0, 0, canvas.width, canvas.height)
+
     player.update();
     enemy.updateEnemy(); //Imagem espelhada
 

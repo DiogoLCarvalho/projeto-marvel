@@ -1,5 +1,6 @@
 const personagens = document.querySelectorAll('.character');
 const jogador02 = document.querySelector('#feiticeira-escarlate');
+let exportCharacterCont = 0;
 
 
 let auxSelecterCharacter = false
@@ -165,6 +166,8 @@ let btnConf = document.querySelector('#conf').addEventListener('click', () => {
     const personagemSelecionado = document.querySelector('.seleted');
     personagemSelecionado.childNodes[1].innerHTML = 'seletecplayer'
 
+    console.log(personagemSelecionado);
+
     // Variavel auxiliar para selecionar o personagem, para trocar o efeito do azul e vermelho
     auxSelecterCharacter = true;
 
@@ -185,4 +188,25 @@ let btnConf = document.querySelector('#conf').addEventListener('click', () => {
     nomeSelecionado.removeAttribute('id');
     const nameJg2 = document.querySelector('.big__character.player__number-2 > .name__character > h2');
     nameJg2.setAttribute('id', 'nome-jogador-01');
+
+    exportCharacterCont++
+
+    if (exportCharacterCont === 2) {
+        var seletedPlayerOne = document.querySelector('.seleted');
+        var seletedPlayerTwo = document.querySelector('.second-player_seleted');
+
+        function exportVariable(params) {
+            seletedPlayerOne = seletedPlayerOne.dataset.name;
+            seletedPlayerTwo = seletedPlayerTwo.dataset.name;
+            return {
+                seletedPlayerOne, 
+                seletedPlayerTwo
+            }
+        }
+
+
+        // Redirecionar para a página do jogo
+        window.location.href = "../src/pages/game.html";
+    }
 });
+

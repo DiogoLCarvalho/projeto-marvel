@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teste</title>
+</head>
+
+<body>
+
+    <script src="../js/characterSettings.js"></script>
+    <script>
+        console.log(skillCard);
+
+        let nomeOne = 'Adivinhe o número';
+        let nomeTwo = 'E-commerce';
+
+        skillCard.forEach(e => {
+
+            if (nomeOne === e.nome) {
+                console.log(e.nome);
+                console.log(e.text);
+                console.log('passou!');
+            }
+
+            if (nomeTwo === e.nome) {
+                console.log(e.nome);
+                console.log('passou 2 !');
+            }
+        });
+    </script>
+</body>
+
+</html>
