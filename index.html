@@ -7,9 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Um jogo de luta criado em HTML, CSS E JavaScript">
     <meta name="author" content="Diogo Lima Carvalho">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/animacoes.css">
     <link rel="stylesheet" href="src/css/seletor-de-personagens/estilo.css">
+
     <title>Choose your character</title>
 </head>
 
@@ -42,7 +46,8 @@
                     <img src="src/imagens/deadpool.jpg" alt="Imagem miniatura do personagem Deadpool da Marvel">
                 </li>
 
-                <li class="character second-player_seleted" id="feiticeira-escarlate" data-name="Feiticeira Escarlate" data-number="03">
+                <li class="character second-player_seleted" id="feiticeira-escarlate" data-name="Feiticeira Escarlate"
+                    data-number="03">
                     <span class="tag">2P</span>
                     <img src="src/imagens/feiticeira-escarlate.png"
                         alt="Imagem miniatura do personagem Feiticeira Escalateda Marvel">
@@ -85,7 +90,7 @@
 
             <!-- Player 2 -->
             <div class="big__character player__number-2">
-                <img src="src/imagens/feiticeira-escarlate-big.png" alt="Imagem do personagem selecionado número dois" >
+                <img src="src/imagens/feiticeira-escarlate-big.png" alt="Imagem do personagem selecionado número dois">
                 <div class="name__character">
                     <h2 id="nome-jogador-02">Feiticeira Escarlate</h2>
                 </div>
@@ -97,12 +102,18 @@
             <div class="card">
                 <div class="content__title">
                     <h2 id="title__name"></h2>
-                    <img src="src/imagens/preview-image.gif" alt="Foto de perfil do personagem via marvel API" id="title_thumbanail">
+                    <img src="src/imagens/preview-image.png" alt="Foto de perfil do personagem via marvel API"
+                        id="title_thumbanail" class="card-img-y rounded color-change-2x" >
                 </div>
                 <div class="content__text">
 
                     <div class="text__box">
-                        <p id="box__descrition"></p>
+                        <p id="box__descrition" class="text-center">
+                            <span class="placeholder col-6"></span>
+                            <span class="placeholder col-8"></span>
+                            <span class="placeholder w-75"></span>
+                            <span class="placeholder" style="width: 25%;"></span>
+                        </p>
                     </div>
                 </div>
                 <div class="content__buttons">
@@ -110,12 +121,13 @@
                     <input type="submit" value="Cancelar" class="button__style" id="canc">
                 </div>
 
-                <p id="card__link"><a href="http://marvel.com\" target="_blank">Data provided by Marvel. © 2022 MARVEL</a></p>
+                <p id="card__link"><a href="http://marvel.com\" target="_blank">Data provided by Marvel. © 2022
+                        MARVEL</a></p>
             </div>
         </section>
 
 
-        
+
         <div class="icons__about">
             <div class="about__text">
                 <p>Imagens dos ícones: <a href="https://twitter.com/clacefall" target="_blank">@clacefall</a></p>
@@ -124,9 +136,12 @@
 
     </main>
 
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
     <script src="src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
-
 </body>
 
 </html>
