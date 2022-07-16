@@ -1,6 +1,6 @@
 const personagens = document.querySelectorAll('.character');
 const jogador02 = document.querySelector('#feiticeira-escarlate');
-let exportCharacterCont = 0;
+var exportCharacterCont = 0;
 
 
 let auxSelecterCharacter = false
@@ -61,8 +61,16 @@ personagens.forEach((personagem) => {
         let thumbnail = document.querySelector('#title_thumbanail');
         let description = document.querySelector('#box__descrition');
 
-        thumbnail.src = 'src/imagens/preview-image.gif';
-        description.innerHTML = ' ';
+        thumbnail.src = '../src/imagens/preview-image.png'
+        thumbnail.classList.add('card-img-y', 'rounded', 'color-change-2x');
+        description.classList.add('text-center');
+        description.innerHTML =
+            `
+        <span class="placeholder col-6"></span>
+        <span class="placeholder col-8"></span>
+        <span class="placeholder w-75"></span>
+        <span class="placeholder" style="width: 25%;"></span>
+        `;
 
         // Abrir card
         sectionCard.style.display = 'block';
@@ -112,11 +120,24 @@ personagens.forEach((personagem) => {
         }
 
         // MARVEL API
+
         fetch(`https://gateway.marvel.com/v1/public/characters/${idCharacterAPI}?&ts=1&apikey=806f2797d31fd36dbdbf2e44ee2c98fb&hash=a3c02225898174c829bb9e7184e35968`).then((responde) => {
             return responde.json();
         }).then((jsonParsed) => {
 
             jsonParsed.data.results.forEach(element => {
+
+                // Remover classe e spans
+                thumbnail.removeAttribute('class');
+                description.removeAttribute('class');
+
+                // Excluir dada tag span que da a animação antes do retorno da API
+                let spans = document.querySelectorAll('.placeholder')
+
+                for (let value of spans) {
+                    value.remove();
+                }
+
                 // Colocar img
                 var heroImg = element.thumbnail.path + '.' + element.thumbnail.extension;
                 thumbnail.src = heroImg;
@@ -195,18 +216,20 @@ let btnConf = document.querySelector('#conf').addEventListener('click', () => {
         var seletedPlayerOne = document.querySelector('.seleted');
         var seletedPlayerTwo = document.querySelector('.second-player_seleted');
 
-        function exportVariable(params) {
-            seletedPlayerOne = seletedPlayerOne.dataset.name;
-            seletedPlayerTwo = seletedPlayerTwo.dataset.name;
-            return {
-                seletedPlayerOne, 
-                seletedPlayerTwo
-            }
-        }
+        seletedPlayerOne = seletedPlayerOne.dataset.name;
+        seletedPlayerTwo = seletedPlayerTwo.dataset.name;
 
+        // Mandar os personagens selecionados para o game 
+        if (typeof (Storage) === 'function') {
+            localStorage.setItem('PlayerOne', seletedPlayerOne);
+            localStorage.setItem('PlayerTwo', seletedPlayerTwo);
+        } else {
+            alert('Infelizmente o seu navegador não suporta localStorage, por favor tente usar outro!')
+        }
 
         // Redirecionar para a página do jogo
         window.location.href = "../src/pages/game.html";
     }
+
 });
 

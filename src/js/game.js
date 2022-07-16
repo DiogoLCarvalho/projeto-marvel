@@ -7,6 +7,30 @@ canvas.height = 567
 c.fillRect(0, 0, canvas.width, canvas.height) // black background
 
 
+// Pegar sprites dos personagens selecionados na página de seleção
+var spritesPlayerOne = []
+var spritesPlayerTwo = []
+
+if (window.localStorage.PlayerOne != undefined && window.localStorage.PlayerTwo != undefined) {
+    var playerSettingOne = localStorage.getItem('PlayerOne')
+    var playerSettingTwo = localStorage.getItem('PlayerTwo')
+
+} else {
+    // Se o jogador cair logo aqui- esses vão ser os jogadores padrões
+    alert('A seleção de personagens deu errado :( Mas aproveite com os personagens padrões!')
+    var playerSettingOne = 'Viúva Negra'
+    var playerSettingTwo = 'Homem Aranha'
+}
+settings.forEach(e => {
+
+    if (playerSettingOne === e.nome) {
+        spritesPlayerOne.push(e.sprites.idle, e.sprites.run, e.sprites.jump, e.sprites.fall, e.sprites.attack1, e.sprites.takeHit, e.sprites.death);
+    }
+
+    if (playerSettingTwo === e.nome) {
+        spritesPlayerTwo.push(e.sprites.idle, e.sprites.run, e.sprites.jump, e.sprites.fall, e.sprites.attack1, e.sprites.takeHit, e.sprites.death);
+    }
+});
 
 
 
@@ -52,43 +76,22 @@ const player = new Fighter({
         x: 0,
         y: 0
     },
-    imgSrc: '../imagens/game/hf/hf_idle.png',
-    framesMax: 9,
-    framesHold:10,
+    imgSrc: spritesPlayerOne[0].imgSrc,
+    framesMax: spritesPlayerOne[0].framesMax,
+    framesHold: 10,
     scale: 1.8,
     offset: { //onde ele vai estar no background
         x: 215,
         y: 147
     },
     sprites: {
-        idle: {
-            imgSrc: '../imagens/game/hf/hf_idle.png',
-            framesMax: 9
-        },
-        run: {
-            imgSrc: '../imagens/game/hf/hf_run.png',
-            framesMax: 2
-        },
-        jump: {
-            imgSrc: '../imagens/game/hf/hf_jump.png',
-            framesMax: 2
-        },
-        fall: {
-            imgSrc: '../imagens/game/hf/hf_fall.png',
-            framesMax: 1
-        },
-        attack1: {
-            imgSrc: '../imagens/game/hf/hf_attack1.png',
-            framesMax: 6
-        },
-        takeHit: {
-            imgSrc: '../imagens/game/hf/hf_takehit.png',
-            framesMax: 3
-        },
-        death: {
-            imgSrc: '../imagens/game/hf/hf_death.png',
-            framesMax: 1
-        }
+        idle: spritesPlayerOne[0],
+        run: spritesPlayerOne[1],
+        jump: spritesPlayerOne[2],
+        fall: spritesPlayerOne[3],
+        attack1: spritesPlayerOne[4],
+        takeHit: spritesPlayerOne[5],
+        death: spritesPlayerOne[6]
     },
     attackBox: {
         offset: {
@@ -114,42 +117,21 @@ const enemy = new Fighter({
         x: -50,
         y: 0
     },
-    imgSrc: '../imagens/game/bw/bw_idle.png',
-    framesMax: 11,
+    imgSrc: spritesPlayerTwo[0].imgSrc,
+    framesMax: spritesPlayerTwo[0].framesMax,
     scale: 1.8,
     offset: {
         x: 215,
         y: 147
     },
     sprites: {
-        idle: {
-            imgSrc: '../imagens/game/bw/bw_idle.png',
-            framesMax: 11
-        },
-        run: {
-            imgSrc: '../imagens/game/bw/bw_run.png',
-            framesMax: 6
-        },
-        jump: {
-            imgSrc: '../imagens/game/bw/bw_jump.png',
-            framesMax: 4
-        },
-        fall: {
-            imgSrc: '../imagens/game/bw/bw_fall.png',
-            framesMax: 5
-        },
-        attack1: {
-            imgSrc: '../imagens/game/bw/bw_attack1.png',
-            framesMax: 6
-        },
-        takeHit: {
-            imgSrc: '../imagens/game/bw/bw_takehit.png',
-            framesMax: 3
-        },
-        death: {
-            imgSrc: '../imagens/game/bw/bw_death.png',
-            framesMax: 4
-        }
+        idle: spritesPlayerTwo[0],
+        run: spritesPlayerTwo[1],
+        jump: spritesPlayerTwo[2],
+        fall: spritesPlayerTwo[3],
+        attack1: spritesPlayerTwo[4],
+        takeHit: spritesPlayerTwo[5],
+        death: spritesPlayerTwo[6]
     },
     attackBox: { // verificar extensão do ataque
         offset: {

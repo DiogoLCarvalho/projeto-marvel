@@ -1,7 +1,6 @@
 const settings = [
     {
         nome: 'Viúva Negra',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/bw/bw_idle.png',
@@ -31,12 +30,10 @@ const settings = [
                 imgSrc: '../imagens/game/bw/bw_death.png',
                 framesMax: 4
             }
-        },
-        text: ''
+        }
     },
     {
         nome: 'Deadpool',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/dp/dp_idle.png',
@@ -66,13 +63,10 @@ const settings = [
                 imgSrc: '../imagens/game/dp/dp_death.png',
                 framesMax: 4
             }
-        },
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Feiticeira Escarlate',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/fe/fe_idle.png',
@@ -102,14 +96,10 @@ const settings = [
                 imgSrc: '../imagens/game/fe/fe_death.png',
                 framesMax: 3
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Doutor Estranho',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/de/de_idle.png',
@@ -139,14 +129,10 @@ const settings = [
                 imgSrc: '../imagens/game/de/de_death.png',
                 framesMax: 2
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
-    }, {
-
+        }
+    },
+    {
         nome: 'Tempestade',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/te/te_idle.png',
@@ -176,14 +162,10 @@ const settings = [
                 imgSrc: '../imagens/game/te/te_death.png',
                 framesMax: 1
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Cavaleiro da Lua',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/mk/mk_idle.png',
@@ -213,14 +195,10 @@ const settings = [
                 imgSrc: '../imagens/game/mk/mk_death.png',
                 framesMax: 3
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Capitã Marvel',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/cm/cm_idle.png',
@@ -250,14 +228,10 @@ const settings = [
                 imgSrc: '../imagens/game/cm/cm_death.png',
                 framesMax: 1
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Homem Aranha',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/ha/ha_idle.png',
@@ -287,14 +261,10 @@ const settings = [
                 imgSrc: '../imagens/game/ha/ha_death.png',
                 framesMax: 6
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     },
     {
         nome: 'Homem de Ferro',
-        img: '',
         sprites: {
             idle: {
                 imgSrc: '../imagens/game/hf/hf_idle.png',
@@ -324,14 +294,11 @@ const settings = [
                 imgSrc: '../imagens/game/hf/hf_death.png',
                 framesMax: 1
             }
-        },
-        text: '',
-        link: '',
-        alt: ''
+        }
     }
 ]
 
-const characterBack = [
+const characterBackground = [
     {
         nome: 'Dormammu',
         imgSrc: '../imagens/game/dormammu.png',

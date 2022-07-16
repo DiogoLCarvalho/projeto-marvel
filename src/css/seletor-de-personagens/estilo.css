@@ -61,9 +61,10 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 /* Inverter personagem */
 .selection .big__character.player__number-2 img {
-    transform: translate(-50%, -50%)  scaleX(-1);
+    transform: translate(-50%, -50%) scaleX(-1);
 }
 
 
@@ -328,6 +329,13 @@ main {
     color: #c74557;
 }
 
+/*animação esperando o retorno da chama da api - escuracendo o bg-img*/
+.color-change-2x {
+    -webkit-animation: color-change-2x 5s linear infinite alternate both;
+    animation: color-change-2x 5s linear infinite alternate both;
+}
+
+
 /* Responsive */
 
 @media (max-width:1585px) {
@@ -347,7 +355,7 @@ main {
     }
 
     .characters__list {
-        max-width: 330px;
+        max-width: 360px;
     }
 
     .characters__list .character {
