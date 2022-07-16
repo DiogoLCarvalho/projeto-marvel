@@ -287,6 +287,19 @@ function animate() {
 
     // SIXTH TASK - Game trigger and game over
     if (player.health <= 0 || enemy.health <= 0) {
+        if (player.health <= 0 && enemy.health > 0) {
+            player.switchSprite('death');
+        }
+
+        if (enemy.health <= 0 && player.health > 0) {
+            enemy.switchSprite('death');
+        }
+
+        if (enemy.health ===  player.health ) {
+            enemy.switchSprite('death');
+            player.switchSprite('death');
+        }
+
         winner({ player, enemy, timerID });
     }
 
@@ -297,14 +310,15 @@ animate();
 
 
 
-var blockControl = false;
+var blockControlE = false;
+var blockControlP = false;
 var jumpCount = 0;
 var jumpMax = 2;
 
 // THIRD  TASK - Mover personagens - event listeners
 
 window.addEventListener('keydown', event => { // faz a verificação de cada tecla que vc clicar no teclado
-    if (!blockControl) {
+    if (!blockControlP) {
 
         // Se um ganhar o outro pode se mexer
         if (!player.dead) {
@@ -329,7 +343,9 @@ window.addEventListener('keydown', event => { // faz a verificação de cada tec
                     break;
             }
         }
+    }
 
+    if (!blockControlE) {
 
         if (!enemy.dead) {
             // Enemy
@@ -355,7 +371,6 @@ window.addEventListener('keydown', event => { // faz a verificação de cada tec
             }
         }
     }
-
 });
 
 window.addEventListener('keyup', event => { // faz a verificação de cada tecla que vc clicar no teclado

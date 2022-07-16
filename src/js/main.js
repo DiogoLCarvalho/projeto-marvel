@@ -228,7 +228,7 @@ let btnConf = document.querySelector('#conf').addEventListener('click', () => {
         }
 
         // Redirecionar para a página do jogo
-        window.location.href = "../src/pages/game.html";
+        window.location.href = "src/pages/game.html";
     }
 
 });
