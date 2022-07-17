@@ -335,6 +335,14 @@ main {
     animation: color-change-2x 5s linear infinite alternate both;
 }
 
+#volume{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    cursor: pointer;
+}
 
 /* Responsive */
 

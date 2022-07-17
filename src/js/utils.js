@@ -7,7 +7,8 @@ function colisao({ player1, enemy }) {
         player1.attackBox.position.y <= enemy.position.y + enemy.height
     )
 }
-
+// Botões quando acaba a partida
+let buttonsFinish = document.querySelector('.l-main_buttons')
 
 // SIXTH TASK - Game trigger and game over
 function winner({ player, enemy, timerID }) {
@@ -18,15 +19,21 @@ function winner({ player, enemy, timerID }) {
     if (auxWinner === false) {
         if (player.health === enemy.health) {
             document.querySelector('.c-timer').innerHTML = 'EMPATE';
+            buttonsFinish.style.display = 'flex';
+            buttonsFinish.style.background = '#00000047';
             blockControlE = true;
             blockControlP = true;
             auxWinner = true;
         } else if (player.health > enemy.health) {
             document.querySelector('.c-timer').innerHTML = 'Jogador 1 Ganhou';
+            buttonsFinish.style.display = 'flex';
+            buttonsFinish.style.background = '#00000047';
             auxWinner = true;
             blockControlE = true;
         } else if (enemy.health > player.health) {
             document.querySelector('.c-timer').innerHTML = 'Jogador 2 Ganhou';
+            buttonsFinish.style.display = 'flex';
+            buttonsFinish.style.background = '#00000047';
             auxWinner = true;
             blockControlP = true;
         }

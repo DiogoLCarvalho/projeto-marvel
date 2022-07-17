@@ -266,8 +266,12 @@ class Fighter extends Sprite {
         // c.save();
         // c.restore();
 
-        // ajuste da imagem do personagem espelhada  
-        c.translate(-300, 0);
+        // ajuste da imagem do personagem espelhada - 
+        if (this === player) {
+            c.translate(-400, 0);
+        }else{
+            c.translate(-400, 0);
+        }
 
         c.drawImage(
             this.image,

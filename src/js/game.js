@@ -106,7 +106,7 @@ const player = new Fighter({
 
 const enemy = new Fighter({
     position: {
-        x: 954,
+        x: 854,
         y: 400
     },
     velocity: {
@@ -135,10 +135,10 @@ const enemy = new Fighter({
     },
     attackBox: { // verificar extensão do ataque
         offset: {
-            x: -200,
+            x: -300,
             y: 0
         },
-        width: 100,
+        width: 144,
         height: 50
     }
 });
@@ -179,11 +179,16 @@ function animate() {
     characterBack.update();
 
     // deixar fundo mais branco
-    c.fillStyle = 'rgba(255,255,255,0.030)';
+    c.fillStyle = 'rgba(255,255,255,0.05)';
     c.fillRect(0, 0, canvas.width, canvas.height)
 
-    player.update();
-    enemy.updateEnemy(); //Imagem espelhada
+    if (!(keys.a.pressed && player.lastKey === 'a')) {
+        player.update();
+    }
+    if (!(keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight')) {
+        enemy.updateEnemy(); //Imagem espelhada
+    }
+
 
 
     // THIRD TASK - mover para direita e esquerda - com isso vc pode mover duas teclas ao mesmo tempo 
@@ -193,6 +198,7 @@ function animate() {
     // mudar a animação
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5 // velocidade dos jogadores
+        player.updateEnemy();  //virar o personagem
         player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5 // velocidade dos jogadores
@@ -216,6 +222,7 @@ function animate() {
         enemy.switchSprite('run')
     } else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5
+        enemy.update();
         enemy.switchSprite('run')
     } else {
         enemy.switchSprite('idle')
@@ -295,7 +302,7 @@ function animate() {
             enemy.switchSprite('death');
         }
 
-        if (enemy.health ===  player.health ) {
+        if (enemy.health === player.health) {
             enemy.switchSprite('death');
             player.switchSprite('death');
         }

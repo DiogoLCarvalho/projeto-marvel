@@ -12,6 +12,11 @@
 
 <body>
     <main class="l-main">
+        <section class="l-main_buttons">
+            <button id="restart"> Reiniciar</button>
+            <a href="../../index.html">Trocar de personagens</a>
+        </section>
+
         <section class="l-main__container">
 
             <article class="l-container right-side">
@@ -34,6 +39,8 @@
         <canvas></canvas>
     </main>
 
+    <img src="../svg/muted.svg" id="volume" alt="volume">
+
     <!-- Animação health -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
         integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
@@ -42,6 +49,10 @@
     <script src="../js/utils.js"></script>
     <script src="../js/classes.js"></script>
     <script src="../js/game.js"></script>
+    <script>
+        //reiniciar o jogo 
+        let restart = document.querySelector('#restart').addEventListener('click', e => window.location.reload());
+    </script>
 </body>
 
 </html>
