@@ -36,10 +36,23 @@
         </section>
 
         <div class="c-timer"></div>
+
+        <div id="name_player">
+            <p class="name-text-pl"><img id="image_player" src="../imagens/game/perfil/te.png"
+                    alt="foto miniatura do personagem escolhido"> <span>Homem de ferro</span></p>
+        </div>
+
+        <div id="name_enemy">
+            <p class="name-text-en"><span>Homem de ferro </span><img id="image_enemy" src="../imagens/game/perfil/te.png"
+                    alt="foto miniatura do personagem escolhido" class="inverted"></p>
+        </div>
+
         <canvas></canvas>
     </main>
 
     <img src="../svg/muted.svg" id="volume" alt="volume">
+
+    <audio src="../audio/music.mp4" loop></audio>
 
     <!-- Animação health -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
@@ -52,6 +65,23 @@
     <script>
         //reiniciar o jogo 
         let restart = document.querySelector('#restart').addEventListener('click', e => window.location.reload());
+
+        // Música
+        let volume = document.querySelector('#volume');
+        let audio = document.querySelector('audio');
+
+        volume.addEventListener('click', () => {
+
+            if (volume.src.includes('muted.svg')) {
+                volume.src = '../svg/volume.svg';
+                audio.currentTime = 0;
+                audio.volume = 0.1;
+                audio.play();
+            } else {
+                volume.src = '../svg/muted.svg';
+                audio.pause();
+            }
+        })
     </script>
 </body>
 

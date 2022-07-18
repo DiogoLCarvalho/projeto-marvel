@@ -126,8 +126,6 @@
             </div>
         </section>
 
-
-
         <div class="icons__about">
             <div class="about__text">
                 <p>Imagens dos ícones: <a href="https://twitter.com/clacefall" target="_blank">@clacefall</a></p>
@@ -137,13 +135,31 @@
         <img src="src/svg/muted.svg" id="volume" alt="volume">
     </main>
 
+    <audio src="src/audio/music.mp4" loop></audio>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
     <script src="src/js/main.js"></script>
     <script src="https://kit.fontawesome.com/f9e19193d6.js" crossorigin="anonymous"></script>
+    <script>
 
+        let volume = document.querySelector('#volume');
+        let audio = document.querySelector('audio');
+        
+        volume.addEventListener('click', () =>{
+
+            if (volume.src.includes('muted.svg')) {
+                volume.src = 'src/svg/volume.svg';
+                audio.currentTime = 0;
+                audio.volume = 0.1;
+                audio.play();
+            }else{
+                volume.src = 'src/svg/muted.svg';
+                audio.pause();
+            }
+        })
+    </script>
 </body>
 
 </html>
