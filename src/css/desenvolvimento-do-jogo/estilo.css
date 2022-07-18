@@ -98,7 +98,7 @@ canvas {
     display: none;
 }
 
-.l-main_buttons{
+.l-main_buttons {
     width: 100%;
     height: 125%;
     position: absolute;
@@ -107,7 +107,9 @@ canvas {
     align-items: center;
     display: none;
 }
-.l-main_buttons button, .l-main_buttons a{
+
+.l-main_buttons button,
+.l-main_buttons a {
     text-align: center;
     border: none;
     padding: 0.6em 1.2em;
@@ -124,18 +126,40 @@ canvas {
     border: 4px solid white;
     z-index: 99;
 }
-.l-main_buttons button:hover,.l-main_buttons a:hover{
+
+.l-main_buttons button:hover,
+.l-main_buttons a:hover {
     background: #ebcf44fa;
 }
-.l-main_buttons a{
+
+.l-main_buttons a {
     color: #fff;
     text-decoration: none;
 }
-#volume{
+
+#volume {
     width: 30px;
     height: 30px;
     position: absolute;
     top: 30px;
     left: 10px;
     cursor: pointer;
+}
+
+#name_player,#name_enemy{
+    color: #fff;
+    font-family: 'command', 'Courier New', Courier, monospace;
+}
+#name_player {
+    position: absolute;
+    top: 75px;
+    left: 30px;
+}
+#name_enemy{
+    position: absolute;
+    top: 75px;
+    right: 30px;
+}
+.inverted{
+    transform:scaleX(-1);
 }

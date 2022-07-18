@@ -8,8 +8,11 @@ c.fillRect(0, 0, canvas.width, canvas.height) // black background
 
 
 // Pegar sprites dos personagens selecionados na página de seleção
-var spritesPlayerOne = []
-var spritesPlayerTwo = []
+var spritesPlayerOne = [];
+var spritesPlayerTwo = [];
+// informações players
+let perfilPlayer = document.querySelector('#image_player');
+let perfilEnemy = document.querySelector('#image_enemy');
 
 if (window.localStorage.PlayerOne != undefined && window.localStorage.PlayerTwo != undefined) {
     var playerSettingOne = localStorage.getItem('PlayerOne')
@@ -25,12 +28,20 @@ settings.forEach(e => {
 
     if (playerSettingOne === e.nome) {
         spritesPlayerOne.push(e.sprites.idle, e.sprites.run, e.sprites.jump, e.sprites.fall, e.sprites.attack1, e.sprites.takeHit, e.sprites.death);
+        perfilPlayer.src = e.perfil;
     }
 
     if (playerSettingTwo === e.nome) {
         spritesPlayerTwo.push(e.sprites.idle, e.sprites.run, e.sprites.jump, e.sprites.fall, e.sprites.attack1, e.sprites.takeHit, e.sprites.death);
+        perfilEnemy.src = e.perfil;
     }
 });
+
+// informações players
+let textPlayer = document.querySelector('.name-text-pl span');
+let textEnemy = document.querySelector('.name-text-en span');
+textPlayer.textContent = playerSettingOne;
+textEnemy.textContent = playerSettingTwo;
 
 
 
@@ -314,9 +325,6 @@ function animate() {
 animate();
 
 
-
-
-
 var blockControlE = false;
 var blockControlP = false;
 var jumpCount = 0;
@@ -402,12 +410,3 @@ window.addEventListener('keyup', event => { // faz a verificação de cada tecla
             break;
     }
 });
-
-
-
-
-//in the code
-// FOURTH TASK - Attacks!!!
-// FIFTH TASK - health life!!!
-// SIXTH TASK - Game trigger and game over
-// SEVENTH TASK - Background sprite

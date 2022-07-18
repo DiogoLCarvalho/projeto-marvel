@@ -39,7 +39,6 @@ personagens.forEach((personagem) => {
 
 
         // Trocar imagem grande 
-
         // O id tem q ser igual ao nome da imagem. se não, não da certo
         // Passa pelo li selecionado e pega o id dele
         const idSelecionado = personagem.attributes.id.value;
@@ -120,7 +119,6 @@ personagens.forEach((personagem) => {
         }
 
         // MARVEL API
-
         fetch(`https://gateway.marvel.com/v1/public/characters/${idCharacterAPI}?&ts=1&apikey=806f2797d31fd36dbdbf2e44ee2c98fb&hash=a3c02225898174c829bb9e7184e35968`).then((responde) => {
             return responde.json();
         }).then((jsonParsed) => {
@@ -186,8 +184,6 @@ let btnConf = document.querySelector('#conf').addEventListener('click', () => {
     // Seleciona o personagem confirmado
     const personagemSelecionado = document.querySelector('.seleted');
     personagemSelecionado.childNodes[1].innerHTML = 'seletecplayer'
-
-    console.log(personagemSelecionado);
 
     // Variavel auxiliar para selecionar o personagem, para trocar o efeito do azul e vermelho
     auxSelecterCharacter = true;

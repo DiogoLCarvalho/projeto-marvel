@@ -30,7 +30,8 @@ const settings = [
                 imgSrc: '../imagens/game/bw/bw_death.png',
                 framesMax: 4
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/bw.png'
     },
     {
         nome: 'Deadpool',
@@ -63,7 +64,8 @@ const settings = [
                 imgSrc: '../imagens/game/dp/dp_death.png',
                 framesMax: 4
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/dp.png'
     },
     {
         nome: 'Feiticeira Escarlate',
@@ -96,7 +98,8 @@ const settings = [
                 imgSrc: '../imagens/game/fe/fe_death.png',
                 framesMax: 3
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/fe.png'
     },
     {
         nome: 'Doutor Estranho',
@@ -129,7 +132,8 @@ const settings = [
                 imgSrc: '../imagens/game/de/de_death.png',
                 framesMax: 2
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/de.png'
     },
     {
         nome: 'Tempestade',
@@ -162,7 +166,8 @@ const settings = [
                 imgSrc: '../imagens/game/te/te_death.png',
                 framesMax: 1
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/te.png'
     },
     {
         nome: 'Cavaleiro da Lua',
@@ -195,7 +200,8 @@ const settings = [
                 imgSrc: '../imagens/game/mk/mk_death.png',
                 framesMax: 3
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/mk.png'
     },
     {
         nome: 'Capitã Marvel',
@@ -228,7 +234,8 @@ const settings = [
                 imgSrc: '../imagens/game/cm/cm_death.png',
                 framesMax: 1
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/cm.png'
     },
     {
         nome: 'Homem Aranha',
@@ -261,7 +268,8 @@ const settings = [
                 imgSrc: '../imagens/game/ha/ha_death.png',
                 framesMax: 6
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/ha.png'
     },
     {
         nome: 'Homem de Ferro',
@@ -294,7 +302,8 @@ const settings = [
                 imgSrc: '../imagens/game/hf/hf_death.png',
                 framesMax: 1
             }
-        }
+        },
+        perfil:'../imagens/game/perfil/hf.png'
     }
 ]
 

@@ -35,8 +35,6 @@ class Sprite {
 
     }
 
-
-
     animetedFrames() {
         this.framesChange++
 
@@ -56,7 +54,6 @@ class Sprite {
 
 
 }
-
 
 
 
@@ -262,15 +259,10 @@ class Fighter extends Sprite {
 
     // virar o personagem ao contrario
     flipHorizontally() {
-
-        // c.save();
-        // c.restore();
-
-        // ajuste da imagem do personagem espelhada - 
         if (this === player) {
-            c.translate(-400, 0);
+            playerSettingOne === 'Deadpool'? c.translate(-300, 0) : c.translate(-400, 0);
         }else{
-            c.translate(-400, 0);
+            playerSettingTwo === 'Deadpool'? c.translate(-300, 0) : c.translate(-400, 0);
         }
 
         c.drawImage(
@@ -289,15 +281,3 @@ class Fighter extends Sprite {
 
 
 }
-
-// Retangulos!!
-// draw() { // colocando o jogador na tela, com a cor, e o posicionamento passado pela instância da classe (50 (largura), 150(altura))
-//     c.fillStyle = this.color
-//     c.fillRect(this.position.x, this.position.y, this.width, this.height)
-
-//     // FOURTH TASK
-//     if (this.isAttacking) {
-//         c.fillStyle = '#FCFC81';
-//         c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-//     }
-// }
