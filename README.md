@@ -5,7 +5,7 @@
 </p>
 
 ## Teste por este link: :exclamation: :exclamation:
-https://diogolcarvalho.github.io/projeto-marvel/
+marvelgame.netlify.app/
 
 ## Comentários 📢
 
