@@ -60,6 +60,8 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    height: 550px;
+
 }
 
 /* Inverter personagem */
@@ -214,8 +216,10 @@ main {
 }
 
 .content__title img {
-    width: 250px;
-    height: 250px;
+    /* width: 250px;
+    height: 250px; */
+    width: 50%;
+    height: 80%;
 }
 
 .content__title h2 {
@@ -335,7 +339,7 @@ main {
     animation: color-change-2x 5s linear infinite alternate both;
 }
 
-#volume{
+#volume {
     width: 30px;
     height: 30px;
     position: absolute;
@@ -343,6 +347,8 @@ main {
     left: 10px;
     cursor: pointer;
 }
+
+
 
 /* Responsive */
 
@@ -391,10 +397,10 @@ main {
         width: 55vw;
     }
 
-    .content__title img {
+    /* .content__title img {
         width: 200px;
         height: 200px;
-    }
+    } */
 
     .text__box {
         width: 70%;
@@ -486,5 +492,24 @@ main {
 @media (max-width:360px) {
     .cabecalho .title {
         font-size: 18px;
+    }
+}
+
+@media (max-height:780px) {
+    .card{
+        height: 87vh;
+    }
+    #box__descrition{
+        font-size: 14px;
+    }
+    .button__style{
+        padding: 6px;
+    }
+    .content__title img {
+        width: 40%;
+        height: 100%;
+    }
+    .content__title h2{
+        font-size: .9em;
     }
 }
