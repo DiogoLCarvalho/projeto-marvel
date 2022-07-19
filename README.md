@@ -5,7 +5,7 @@
 </p>
 
 ## Teste por este link: :exclamation: :exclamation:
-marvelgame.netlify.app/
+https://marvelgame.netlify.app/
 
 ## Comentários 📢
 
