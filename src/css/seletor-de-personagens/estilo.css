@@ -60,8 +60,7 @@ main {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 550px;
-
+    height: 540px;
 }
 
 /* Inverter personagem */
@@ -396,11 +395,6 @@ main {
     .card {
         width: 55vw;
     }
-
-    /* .content__title img {
-        width: 200px;
-        height: 200px;
-    } */
 
     .text__box {
         width: 70%;
