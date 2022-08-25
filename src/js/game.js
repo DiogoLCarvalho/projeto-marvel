@@ -353,7 +353,7 @@ window.addEventListener('keydown', event => { // faz a verificação de cada tec
                         player.velocity.y = -14;
                     }
                     break;
-                case ' ': // FOURTH TASK - ativar ataque
+                case 's': // FOURTH TASK - ativar ataque
                     player.attacks();
                     break;
             }
