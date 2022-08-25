@@ -28,7 +28,7 @@ A ideia é o jogador escolher os personagens, e colocá-los para brigar!!!   <im
     - `w`: Pular
     - `a`: Mover para esqueda
     - `d`: Mover para direita
-    - `ESPAÇO`: Atacar
+    - `s`: Atacar
     <br>
   - `Jogador 2`:
     - `seta para cima`: Pular
